@@ -1,3 +1,10 @@
+qgis (1.8.0) UNRELEASED; urgency=low
+
+  * new development version 1.8 after branch
+  * add qgis browser (qbrowser)
+
+ -- Jürgen E. Fischer <jef@norbit.de>  Mon, 23 May 2011 18:08:18 +0200
+
 qgis (1.7.0) UNRELEASED; urgency=low
 
   * new development version 1.7 after branch

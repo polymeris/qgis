@@ -1,8 +1,8 @@
 SET(CPACK_PACKAGE_VERSION_MAJOR "1")
-SET(CPACK_PACKAGE_VERSION_MINOR "7")
+SET(CPACK_PACKAGE_VERSION_MINOR "8")
 SET(CPACK_PACKAGE_VERSION_PATCH "0")
 SET(COMPLETE_VERSION ${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH})
-SET(RELEASE_NAME "Wroclaw")
+SET(RELEASE_NAME "Trunk")
 SET(PROJECT_VERSION ${COMPLETE_VERSION})
 PROJECT(qgis${PROJECT_VERSION})
 IF (APPLE)
@@ -59,6 +59,9 @@ SET (WITH_MAPSERVER FALSE CACHE BOOL "Determines whether QGIS mapserver should b
 
 # include doxygen documentation
 SET (WITH_APIDOC FALSE CACHE BOOL "Determines whether the QGIS API doxygen documentation should be built")
+
+# build our version of astyle
+SET (WITH_ASTYLE FALSE CACHE BOOL "If you plan to contribute you should reindent with scripts/prepare-commit.sh (using 'our' astyle)")
 
 # try to configure and build POSTGRESQL support
 SET (WITH_POSTGRESQL TRUE CACHE BOOL "Determines whether POSTGRESQL support should be built")
@@ -345,27 +348,17 @@ IF(COMMAND cmake_policy)
 ENDIF(COMMAND cmake_policy)
 
 IF (WIN32)
-  # expect that classes are being imported
-  # Note: MSVC doesn't like when the macros are quotes
-  # and MSYS doesn't like them unqouted (bacause of braces)
-  IF (MSVC)
-    ADD_DEFINITIONS("-DCORE_EXPORT=__declspec(dllimport)")
-    ADD_DEFINITIONS("-DGUI_EXPORT=__declspec(dllimport)")
-    ADD_DEFINITIONS("-DPYTHON_EXPORT=__declspec(dllimport)")
-    ADD_DEFINITIONS("-DANALYSIS_EXPORT=__declspec(dllimport)")
-  ELSE (MSVC)
-    ADD_DEFINITIONS("\"-DCORE_EXPORT=__declspec(dllimport)\"")
-    ADD_DEFINITIONS("\"-DGUI_EXPORT=__declspec(dllimport)\"")
-    ADD_DEFINITIONS("\"-DPYTHON_EXPORT=__declspec(dllimport)\"")
-    ADD_DEFINITIONS("\"-DANALYSIS_EXPORT=__declspec(dllimport)\"")
-  ENDIF (MSVC)
+  SET(DLLIMPORT "__declspec(dllimport)")
+  SET(DLLEXPORT "__declspec(dllexport)")
 ELSE (WIN32)
-  # other compilers don't use that MSVC construct
-  ADD_DEFINITIONS(-DCORE_EXPORT=)
-  ADD_DEFINITIONS(-DGUI_EXPORT=)
-  ADD_DEFINITIONS(-DPYTHON_EXPORT=)
-  ADD_DEFINITIONS(-DANALYSIS_EXPORT=)
-ENDIF (WIN32)
+  SET(DLLIMPORT "")
+  SET(DLLEXPORT "")
+ENDIF(WIN32)
+
+ADD_DEFINITIONS("-DCORE_EXPORT=${DLLIMPORT}")
+ADD_DEFINITIONS("-DGUI_EXPORT=${DLLIMPORT}")
+ADD_DEFINITIONS("-DPYTHON_EXPORT=${DLLIMPORT}")
+ADD_DEFINITIONS("-DANALYSIS_EXPORT=${DLLIMPORT}")
 
 #############################################################
 # user-changeable settings which can be used to customize
@@ -446,12 +439,21 @@ FIND_FILE(GIT_MARKER index PATHS ${CMAKE_SOURCE_DIR}/.git)
 IF (GIT_MARKER)
   FIND_PROGRAM(GIT git PATHS c:/cygwin/bin)
   IF(GIT)
-    ADD_CUSTOM_COMMAND(
-      OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/qgsversion.h
-      COMMAND echo \\\#define QGSVERSION \\\"$$\( ${GIT} log -n1 --pretty=%h \)\\\" >${CMAKE_CURRENT_BINARY_DIR}/qgsversion.h
-      MAIN_DEPENDENCY ${GIT_MARKER}
-      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-    )
+    IF(MSVC)
+      ADD_CUSTOM_COMMAND(
+        OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/qgsversion.h
+        COMMAND for /f \"usebackq tokens=1\" %%a in "(`\"${GIT}\" log -n1 --oneline`)" do echo \#define QGSVERSION \"%%a\" >${CMAKE_CURRENT_BINARY_DIR}/qgsversion.h
+        MAIN_DEPENDENCY ${GIT_MARKER}
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+      )
+    ELSE(MSVC)
+      ADD_CUSTOM_COMMAND(
+        OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/qgsversion.h
+        COMMAND echo \\\#define QGSVERSION \\\"$$\( ${GIT} log -n1 --pretty=%h \)\\\" >${CMAKE_CURRENT_BINARY_DIR}/qgsversion.h
+        MAIN_DEPENDENCY ${GIT_MARKER}
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+      )
+    ENDIF(MSVC)
   ELSE(GIT)
     MESSAGE(STATUS "git marker, but no git found - version will be unknown")
     FILE(WRITE ${CMAKE_CURRENT_BINARY_DIR}/qgsversion.h "#define QGSVERSION \"unknown\"")

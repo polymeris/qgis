@@ -8032,7 +8032,7 @@ Stai vedendo questo messaggio perché probabilmente non hai settato la variabile
     <message>
         <location filename="../src/app/qgisapp.cpp" line="480"/>
         <source>Starting Python</source>
-        <translation>Partenza python</translation>
+        <translation>Avvio python</translation>
     </message>
     <message>
         <source>
@@ -21854,7 +21854,7 @@ Può essere o un problema della propria connessione di rete o sul lato del serve
     </message>
     <message>
         <location filename="../src/core/qgsmaplayer.cpp" line="714"/>
-        <source>The directory containing your dataset needs to be writeable!</source>
+        <source>The directory containing your dataset needs to be writable!</source>
         <translation>La cartella che contiene il set di dati deve essere scrivibile!</translation>
     </message>
     <message>
@@ -24546,7 +24546,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../src/ui/qgsoptionsbase.ui" line="1392"/>
         <location filename="../src/ui/qgsoptionsbase.ui" line="1475"/>
         <source>Select...</source>
-        <translation>Scagli...</translation>
+        <translation>Scegli...</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="1412"/>
@@ -24753,7 +24753,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="1531"/>
         <source>Override system locale</source>
-        <translation>Sovascrivi lingua in uso</translation>
+        <translation>Sovrascrivi lingua in uso</translation>
     </message>
     <message>
         <location filename="../src/ui/qgsoptionsbase.ui" line="1550"/>
@@ -26832,7 +26832,7 @@ Result: %3 (%4)</translation>
 The error message from the database was:
 %2.
 SQL: %3</source>
-        <translation>Impossibiel accedere alla tabella %1.
+        <translation>Impossibile accedere alla tabella %1.
 Questo il messaggio di errore dal database:
 %2.
 SQL: %3</translation>
@@ -26928,7 +26928,7 @@ SQL: %3</translation>
     </message>
     <message>
         <location filename="../src/core/qgsproject.cpp" line="982"/>
-        <source>%1 is not writeable. Please adjust permissions (if possible) and try again.</source>
+        <source>%1 is not writable. Please adjust permissions (if possible) and try again.</source>
         <translation>%1 non é scrivibile. Sistemare (se possibile) i permessi e provare ancora.</translation>
     </message>
     <message>
@@ -28570,7 +28570,7 @@ p, li { white-space: pre-wrap; }(new line)
     </message>
     <message>
         <location filename="../src/app/qgsrasterlayerproperties.cpp" line="1560"/>
-        <source>The file was not writeable. Some formats do not support pyramid overviews. Consult the GDAL documentation if in doubt.</source>
+        <source>The file was not writable. Some formats do not support pyramid overviews. Consult the GDAL documentation if in doubt.</source>
         <translation>Il file non era scrivibile. Alcuni formati non supportano le piramid overwiev. Nel dubbio consultare la documentazione di GDAL.</translation>
     </message>
     <message>
@@ -35578,7 +35578,7 @@ URL provata: %1</translation>
     <message>
         <location filename="../src/plugins/roadgraph/shortestpathwidget.cpp" line="78"/>
         <source>Stop</source>
-        <translation>Interrompi</translation>
+        <translation>Arrivo</translation>
     </message>
     <message>
         <location filename="../src/plugins/roadgraph/shortestpathwidget.cpp" line="91"/>

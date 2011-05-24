@@ -113,18 +113,6 @@ class QgisApp : public QMainWindow, private Ui::MainWindow
       */
     bool addRasterLayers( QStringList const & theLayerQStringList, bool guiWarning = true );
 
-    /** Open a raster layer using the Raster Data Provider.
-     *  Note this is included to support WMS layers only at this stage,
-     *  GDAL layer support via a Provider is not yet implemented.
-     */
-    QgsRasterLayer* addRasterLayer( QString const & rasterLayerPath,
-                                    QString const & baseName,
-                                    QString const & providerKey,
-                                    QStringList const & layers,
-                                    QStringList const & styles,
-                                    QString const & format,
-                                    QString const & crs );
-
     /** open a raster layer for the given file
       @returns false if unable to open a raster layer for rasterFile
       @note
@@ -226,14 +214,12 @@ class QgisApp : public QMainWindow, private Ui::MainWindow
     QAction *actionCutFeatures() { return mActionCutFeatures; }
     QAction *actionCopyFeatures() { return mActionCopyFeatures; }
     QAction *actionPasteFeatures() { return mActionPasteFeatures; }
-    QAction *actionCapturePoint() { return mActionCapturePoint; }
-    QAction *actionCaptureLine() { return mActionCaptureLine; }
-    QAction *actionCapturePolygon() { return mActionCapturePolygon; }
     QAction *actionDeleteSelected() { return mActionDeleteSelected; }
+    QAction *actionAddFeature() { return mActionAddFeature; }
     QAction *actionMoveFeature() { return mActionMoveFeature; }
     QAction *actionSplitFeatures() { return mActionSplitFeatures; }
     QAction *actionAddRing() { return mActionAddRing; }
-    QAction *actionAddIsland() { return mActionAddIsland; }
+    QAction *actionAddPart() { return mActionAddPart; }
     QAction *actionSimplifyFeature() { return mActionSimplifyFeature; }
     QAction *actionDeleteRing() { return mActionDeleteRing; }
     QAction *actionDeletePart() { return mActionDeletePart; }
@@ -345,9 +331,6 @@ class QgisApp : public QMainWindow, private Ui::MainWindow
     QToolBar *helpToolBar() { return mHelpToolBar; }
     QToolBar *rasterToolBar() { return mRasterToolBar; }
 
-    //! run python
-    void runPythonString( const QString &expr );
-
     //! show layer properties
     void showLayerProperties( QgsMapLayer *ml );
 
@@ -436,6 +419,17 @@ class QgisApp : public QMainWindow, private Ui::MainWindow
     //! Watch for QFileOpenEvent.
     virtual bool event( QEvent * event );
 
+    /** Open a raster layer using the Raster Data Provider.
+     *  Note this is included to support WMS layers only at this stage,
+     *  GDAL layer support via a Provider is not yet implemented.
+     */
+    QgsRasterLayer* addRasterLayer( QString const & rasterLayerPath,
+                                    QString const & baseName,
+                                    QString const & providerKey,
+                                    QStringList const & layers,
+                                    QStringList const & styles,
+                                    QString const & format,
+                                    QString const & crs );
   protected:
 
     //! Handle state changes (WindowTitleChange)
@@ -590,6 +584,8 @@ class QgisApp : public QMainWindow, private Ui::MainWindow
     void customProjection();
     //! configure shortcuts
     void configureShortcuts();
+    //! show customization dialog
+    void customize();
     //! options dialog slot
     void options();
     //! Whats-this help slot
@@ -607,28 +603,18 @@ class QgisApp : public QMainWindow, private Ui::MainWindow
     void showBookmarks();
     //! Create a new spatial bookmark
     void newBookmark();
-    //! activates the capture point tool
-    void capturePoint();
-    //! activates the capture line tool
-    void captureLine();
-    //! activates the capture polygon tool
-    void capturePolygon();
+    //! activates the add feature tool
+    void addFeature();
     //! activates the move feature tool
     void moveFeature();
     //! activates the reshape features tool
     void reshapeFeatures();
     //! activates the split features tool
     void splitFeatures();
-    //! activates the add vertex tool
-    void addVertex();
-    //! activates the move vertex tool
-    void moveVertex();
-    //! activates the delete vertex tool
-    void deleteVertex();
     //! activates the add ring tool
     void addRing();
-    //! activates the add island tool
-    void addIsland();
+    //! activates the add part tool
+    void addPart();
     //! simplifies feature
     void simplifyFeature();
     //! deletes ring in polygon
@@ -724,6 +710,9 @@ class QgisApp : public QMainWindow, private Ui::MainWindow
 
     //! starts/stops editing mode of a layer
     bool toggleEditing( QgsMapLayer *layer, bool allowCancel = true );
+
+    //! save edits of a layer
+    void saveEdits( QgsMapLayer *layer );
 
     //! save current vector layer
     void saveAsVectorFile();
@@ -923,9 +912,7 @@ class QgisApp : public QMainWindow, private Ui::MainWindow
         QgsMapTool* mMeasureDist;
         QgsMapTool* mMeasureArea;
         QgsMapTool* mMeasureAngle;
-        QgsMapTool* mCapturePoint;
-        QgsMapTool* mCaptureLine;
-        QgsMapTool* mCapturePolygon;
+        QgsMapTool* mAddFeature;
         QgsMapTool* mMoveFeature;
         QgsMapTool* mReshapeFeatures;
         QgsMapTool* mSplitFeatures;
@@ -938,7 +925,7 @@ class QgisApp : public QMainWindow, private Ui::MainWindow
         QgsMapTool* mVertexMove;
         QgsMapTool* mVertexDelete;
         QgsMapTool* mAddRing;
-        QgsMapTool* mAddIsland;
+        QgsMapTool* mAddPart;
         QgsMapTool* mSimplifyFeature;
         QgsMapTool* mDeleteRing;
         QgsMapTool* mDeletePart;
@@ -986,8 +973,6 @@ class QgisApp : public QMainWindow, private Ui::MainWindow
     QMenu *toolPopupOverviews;
     //! Popup menu for the display tools
     QMenu *toolPopupDisplay;
-    //! Popup menu for the capture tools
-    QMenu *toolPopupCapture;
     //! Map canvas
     QgsMapCanvas *mMapCanvas;
     //! Table of contents (legend) for the map
