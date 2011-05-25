@@ -19,5 +19,5 @@ def authorName():
     return "Camilo Polymeris"
     
 def classFactory(iface):
-    from plugin import SAGAModulesPlugin
-    return SAGAModulesPlugin(iface)
+    from plugin import SAGAPlugin
+    return SAGAPlugin(iface)

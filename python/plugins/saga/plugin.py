@@ -23,29 +23,46 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from qgis.core import *
 
-import saga_rc
-from panel import Panel
+import os
+import processing
+import saga_api as saga
 
-class SAGAModulesPlugin:
+def getLibraryPaths():
+    try:
+        paths = os.environ['MLB_PATH'].split(':')
+    except KeyError:
+        paths = ['/usr/lib/saga/', '/usr/local/lib/saga/']
+        print "MLB_PATH not set."
+    for p in paths:
+        print "Seaching SAGA modules in " + p + "."
+        if os.path.exists(p): return os.listdir(p)
+    raise RuntimeError("No SAGA modules found.")
+
+class SAGAPlugin(processing.Plugin):
     def __init__(self, iface):
-	self.iface = iface
-	self.panel = Panel(iface)
+		self.libraries = [Library(p) for p in getLibraryPaths()]
+		processing.Plugin.__init__(self, iface, self.libraries)
 
-    def initGui(self):
-	icon = QIcon(":/sagamodules/saga.png")
-	self.action = QAction(icon,
-	    "Show SAGA Modules",
-	    self.iface.mainWindow())
-	self.action.setCheckable(True)
-	self.action.setWhatsThis("Show SAGA module list in side panel")
-	self.action.setStatusTip("Show SAGA module list in side panel")
-	QObject.connect(self.action,
-	    SIGNAL("triggered(bool)"), self.panel.setVisible)
-	QObject.connect(self.panel,
-	    SIGNAL("visibilityChanged(bool)"), self.action.setChecked)
-	self.separator = self.iface.pluginMenu().addSeparator()
-	self.iface.pluginMenu().addAction(self.action)
-
-    def unload(self):
-	self.iface.pluginMenu().removeAction(self.separator)
-	self.iface.pluginMenu().removeAction(self.action)
+class Library(processing.Library):
+    def __init__(self, filename):
+        lib = saga.CSG_Module_Library(saga.CSG_String(filename))
+        if not lib.is_Valid(): return
+        modules = [Module(lib, i) for i in range(lib.Get_Count())]
+        processing.Library.__init__(self,
+            lib.Get_Name().c_str(), lib.Get_Description().c_str(),
+            modules)
+            
+class Module(processing.Module):
+    def __init__(self, lib, i):
+        self.module = lib.Get_Module(i)
+        self.interactive = self.module.Is_Interactive()
+        self.grid = self.module.Is_Grid()
+        if self.interactive and self.grid:
+            self.module = lib.Get_Module_Grid_I(i)
+        elif self.grid:
+            self.module = lib.Get_Module_Grid(i)
+        elif self.interactive:
+            self.module = lib.Get_Module_Interactive(i)
+        processing.Module.__init__(self,
+            self.module.Get_Name(),
+            self.module.Get_Description())

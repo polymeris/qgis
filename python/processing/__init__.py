@@ -12,6 +12,7 @@ class Library:
         self.name = name
         self.description = description
         self.modules = modules
+        print "Loading library " + name
     def name(self):
         return self.name
     def description(self):
@@ -52,6 +53,7 @@ class Module:
             self.description = description
             self.tags = tags
             self.parameters = parameters
+            print "Loading module " + name
     def name(self):
         return self.name
     def description(self):
