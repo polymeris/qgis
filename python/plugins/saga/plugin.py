@@ -35,7 +35,8 @@ def getLibraryPaths():
         print "MLB_PATH not set."
     for p in paths:
         print "Seaching SAGA modules in " + p + "."
-        if os.path.exists(p): return os.listdir(p)
+        if os.path.exists(p):
+            return [p + fn for fn in os.listdir(p)]
     raise RuntimeError("No SAGA modules found.")
 
 class SAGAPlugin(processing.Plugin):
@@ -45,7 +46,9 @@ class SAGAPlugin(processing.Plugin):
 
 class Library(processing.Library):
     def __init__(self, filename):
+        print filename
         lib = saga.CSG_Module_Library(saga.CSG_String(filename))
+        print lib.is_Valid()
         if not lib.is_Valid(): return
         modules = [Module(lib, i) for i in range(lib.Get_Count())]
         processing.Library.__init__(self,
@@ -55,14 +58,15 @@ class Library(processing.Library):
 class Module(processing.Module):
     def __init__(self, lib, i):
         self.module = lib.Get_Module(i)
-        self.interactive = self.module.Is_Interactive()
-        self.grid = self.module.Is_Grid()
+        if not self.module: return
+        self.interactive = self.module.is_Interactive()
+        self.grid = self.module.is_Grid()
         if self.interactive and self.grid:
             self.module = lib.Get_Module_Grid_I(i)
         elif self.grid:
             self.module = lib.Get_Module_Grid(i)
         elif self.interactive:
-            self.module = lib.Get_Module_Interactive(i)
+            self.module = lib.Get_Module_I(i)
         processing.Module.__init__(self,
             self.module.Get_Name(),
             self.module.Get_Description())
