@@ -85,7 +85,6 @@ standardTags = [Tag(s) for s in ["2D", "3D", "analysis",
             "postscript", "projection", "raster", "simulation",
             "statistics", "vector"]]
 
-
 class Module:
     def __init__(self, name,
         description = None, tags = None, parameters = None):
@@ -102,6 +101,7 @@ class Module:
         if self._tags:
             return self._tags
         else:
-            return [Tag(s) for s in self.name().split()]
+            return [Tag(s.strip(" .-_()/,")) for s in
+                self.name().lower().split()]
     def parameters(self):
         return self._parameters
