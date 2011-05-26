@@ -90,4 +90,4 @@ class Module(processing.Module):
             self.module.Get_Name(),
             self.module.Get_Description())
     def tags(self):
-        return processing.Module.tags(self) + [processing.Tag('saga')]
+        return processing.Module.tags(self) | set([processing.Tag('saga')])
