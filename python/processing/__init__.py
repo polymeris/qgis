@@ -22,6 +22,9 @@
 class Framework:
     def __init__(self):
         self._modules = dict()
+    """ Register library with the framework.
+        Adds the libraries modules to the framework's list.
+    """
     def registerLibrary(self, library):
         for m in library.modules():
             self._modules[m.name()] = m
@@ -37,6 +40,10 @@ class Framework:
 
 framework = Framework()
 
+""" Processing plugin baseclass.
+    Partially overrides the QGIS plugin interface.
+    Subclass this when implementing your own processing plugin.
+"""
 class Plugin:
     def __init__(self, iface, libraries):
         self._iface = iface
@@ -46,6 +53,8 @@ class Plugin:
     def unload(self):
         pass
 
+# is this class necessary/useful? Perhaps move this functionality to
+# plugin.
 class Library:
     def __init__(self, name, description = None, modules = None):
         self._name = name
@@ -85,6 +94,8 @@ standardTags = [Tag(s) for s in ["2D", "3D", "analysis",
             "postscript", "projection", "raster", "simulation",
             "statistics", "vector"]]
 
+""" A processing module.
+"""
 class Module:
     def __init__(self, name,
         description = None, tags = None, parameters = None):
