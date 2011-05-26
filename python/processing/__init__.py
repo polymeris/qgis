@@ -19,6 +19,24 @@
 #   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 #   MA 02110-1301, USA.
 
+class Framework:
+    def __init__(self):
+        self._modules = dict()
+    def registerLibrary(self, library):
+        for m in library.modules():
+            self._modules[m.name()] = m
+    """ Returns complete list of registered modules.
+    """
+    def modules(self):
+        return self._modules
+    """ Returns modules that match the tag specified.
+    """
+    def modulesByTag(self, tag):
+        tag = Tag(tag)
+        return filter(lambda m: tag in m.tags(), self.modules())
+
+framework = Framework()
+
 class Plugin:
     def __init__(self, iface, libraries):
         self._iface = iface
@@ -84,6 +102,6 @@ class Module:
         if self._tags:
             return self._tags
         else:
-            return name().split()
+            return [Tag(s) for s in self.name().split()]
     def parameters(self):
         return self._parameters

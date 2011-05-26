@@ -41,24 +41,43 @@ def getLibraryPaths():
 
 class SAGAPlugin(processing.Plugin):
     def __init__(self, iface):
-		self.libraries = [Library(p) for p in getLibraryPaths()]
-		processing.Plugin.__init__(self, iface, self.libraries)
+        libraries = list()
+        for p in getLibraryPaths():
+            try:
+                libraries.append(Library(p))
+            except InvalidLibrary:
+                print "Invalid library."
+        processing.Plugin.__init__(self, iface, libraries)
 
+class InvalidLibrary(RuntimeError):
+    def __init__(self, name):
+        RuntimeError.__init__(self, "Library invalid " + name + ".")
+        
 class Library(processing.Library):
     def __init__(self, filename):
         print filename
         lib = saga.CSG_Module_Library(saga.CSG_String(filename))
-        print lib.is_Valid()
-        if not lib.is_Valid(): return
-        modules = [Module(lib, i) for i in range(lib.Get_Count())]
+        if not lib.is_Valid():
+            raise InvalidLibrary(filename)
+        modules = list()
+        for i in range(lib.Get_Count()):
+            try:
+                modules.append(Module(lib, i))
+            except InvalidModule:
+                print "Invalid module."
         processing.Library.__init__(self,
             lib.Get_Name().c_str(), lib.Get_Description().c_str(),
             modules)
+
+class InvalidModule(RuntimeError):
+    def __init__(self, name):
+        RuntimeError.__init__(self, "Module invalid " + name + ".")
             
 class Module(processing.Module):
     def __init__(self, lib, i):
         self.module = lib.Get_Module(i)
-        if not self.module: return
+        if not self.module:
+            raise InvalidModule("#" + str(i))
         self.interactive = self.module.is_Interactive()
         self.grid = self.module.is_Grid()
         if self.interactive and self.grid:
@@ -70,3 +89,5 @@ class Module(processing.Module):
         processing.Module.__init__(self,
             self.module.Get_Name(),
             self.module.Get_Description())
+    def tags(self):
+        return processing.Module.tags(self) + [processing.Tag('saga')]
