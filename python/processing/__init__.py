@@ -1,7 +1,28 @@
+# -*- coding: utf-8 -*-
+
+#	QGIS Processing Framework
+#
+#	parameters.py (C) Camilo Polymeris
+#	
+#   This program is free software; you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation; either version 2 of the License, or
+#   (at your option) any later version.
+# 
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#       
+#   You should have received a copy of the GNU General Public License
+#   along with this program; if not, write to the Free Software
+#   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+#   MA 02110-1301, USA.
+
 class Plugin:
     def __init__(self, iface, libraries):
-        self.iface = iface
-        self.libraries = libraries
+        self._iface = iface
+        self._libraries = libraries
     def initGui(self):
         pass
     def unload(self):
@@ -9,16 +30,17 @@ class Plugin:
 
 class Library:
     def __init__(self, name, description = None, modules = None):
-        self.name = name
-        self.description = description
-        self.modules = modules
+        self._name = name
+        self._description = description
+        self._modules = modules
         print "Loading library " + name
+        framework.registerLibrary(self)
     def name(self):
-        return self.name
+        return self._name
     def description(self):
-        return self.description
+        return self._description
     def modules(self):
-        return self.modules
+        return self._modules
 
 """ Case insensitive strings for tag usage.
 """
@@ -49,19 +71,19 @@ standardTags = [Tag(s) for s in ["2D", "3D", "analysis",
 class Module:
     def __init__(self, name,
         description = None, tags = None, parameters = None):
-            self.name = name
-            self.description = description
-            self.tags = tags
-            self.parameters = parameters
+            self._name = name
+            self._description = description
+            self._tags = tags
+            self._parameters = parameters
             print "Loading module " + name
     def name(self):
-        return self.name
+        return self._name
     def description(self):
-        return self.description
+        return self._description
     def tags(self):
-        if self.tags:
-            return tags
+        if self._tags:
+            return self._tags
         else:
-            return name.split()
+            return name().split()
     def parameters(self):
-        return self.parameters
+        return self._parameters
