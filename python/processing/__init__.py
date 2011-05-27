@@ -71,9 +71,10 @@ class Framework:
     def representativeTags(self):
         """ Returns list of tags that aren't too frequent or to infrequent
         to be representative.
-        That is, cut top 10% and bottom 5%.
+        That is, cut tags that only apply to 5% of the modules or to
+        more than 80%.
         """
-        criterion = lambda (_, v): v > 0.05 and v < 0.90
+        criterion = lambda (_, v): v > 0.05 and v < 0.80
         tags = self.tagFrequency().items()
         tags, _ = zip(*filter(criterion, tags))
         return tags
@@ -120,21 +121,36 @@ class Library:
 class Module:
     """ A processing module. """
     def __init__(self, name,
-        description = None, tags = None, parameters = []):
+        description = "", tags = None, parameters = []):
             self._name = name
             self._description = description
             self._tags = tags
             self._parameters = set(parameters)
-            print "Loading module " + name
     def name(self):
         return self._name
     def description(self):
+        """ The modules description string.
+        If no description is provided on construction, returns an empty
+        string.
+        """
         return self._description
     def tags(self):
+        """ The modules tags.
+        By default, this method searches for 'standard tags' in the
+        module's name & description. Dumb method, so reimplement if
+        possible.
+        To customize this, either indicate tags on construction or
+        override this method.
+        """
         if self._tags:
             return set(self._tags)
         else:
-            return set([Tag(s.strip(" .-_()/,")) for s in
-                self.name().lower().split()])
+            text = (self.name() + " " + self.description()).lower()
+            tags = set([Tag(s.strip(" .-_()/,")) for s in text.split()])
+            return Framework.standardTags & tags
     def parameters(self):
+        """ The modules parameters.
+        Specifiy on construction or override this method to provide your
+        own. Returns empty set if neither is done.
+        """
         return self._parameters
