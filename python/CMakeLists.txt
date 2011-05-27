@@ -1,4 +1,4 @@
-SUBDIRS(plugins)
+SUBDIRS(processing plugins)
 
 IF (WITH_INTERNAL_SPATIALITE)
   SUBDIRS(pyspatialite)
