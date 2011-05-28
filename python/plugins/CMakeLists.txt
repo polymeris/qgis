@@ -1,1 +1,6 @@
-SUBDIRS(plugin_installer mapserver_export fTools GdalTools osm saga)
+ADD_SUBDIRECTORY(plugin_installer)
+ADD_SUBDIRECTORY(mapserver_export)
+ADD_SUBDIRECTORY(fTools)
+ADD_SUBDIRECTORY(GdalTools)
+ADD_SUBDIRECTORY(osm)
+ADD_SUBDIRECTORY(saga)
