@@ -1,0 +1,68 @@
+# -*- coding: utf-8 -*-
+
+#	QGIS Processing Framework
+#
+#	gui/__init__.py (C) Camilo Polymeris
+#	
+#   This program is free software; you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation; either version 2 of the License, or
+#   (at your option) any later version.
+# 
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#       
+#   You should have received a copy of the GNU General Public License
+#   along with this program; if not, write to the Free Software
+#   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+#   MA 02110-1301, USA.
+
+from PyQt4.QtGui import QDockWidget, QTreeWidgetItem, QDialog
+from PyQt4.QtCore import QObject, SIGNAL, Qt
+from ui_dialog import Ui_runDialog
+from ui_panel import Ui_dock
+
+class Panel(QDockWidget, Ui_dock):
+    def __init__(self, framework, iface):
+        QDockWidget.__init__(self, iface.mainWindow())
+        self._framework = framework
+        self._iface = iface
+        self._dialogs = list()
+        self.setupUi(self)
+        tags = framework.representativeTags()
+        self.buildModuleList(tags)
+    	QObject.connect(self.moduleList,
+			SIGNAL("itemActivated(QTreeWidgetItem *, int)"),
+			self.onItemActivated)
+        self.setFloating(False)
+    def buildModuleList(self, tags):
+        topNode = self.moduleList
+        # a set of modules not yet added to the list
+        pending = set(self._framework.modules())
+        # add a node for each tag
+        for tag in tags:
+            tagNode = QTreeWidgetItem(topNode, [tag])
+            # and its children
+            for mod in self._framework.modulesByTag(tag):
+                self.addModuleToList(tagNode, mod)
+                pending.discard(mod)
+        # add non-tagged modules
+        tagNode = QTreeWidgetItem(topNode, ["other"])
+        for mod in pending:
+            self.addModuleToList(tagNode, mod)
+    def addModuleToList(self, parent, module):
+        item = QTreeWidgetItem(parent, [module.name()])
+        # pointer to the module stored with the item
+        item.setData(1, Qt.UserRole, module)
+    def onItemActivated(self, item, _):
+        module = item.data(1, Qt.UserRole).value()
+        dialog = Dialog(self._iface, module)
+        self._dialogs.append(dialog)
+        dialog.show()
+
+class Dialog(QDialog, Ui_runDialog):
+    def __init__(self, iface, module):
+        print "Create dialog for module " + module.name()
+        pass

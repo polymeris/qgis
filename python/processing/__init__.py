@@ -2,7 +2,7 @@
 
 #	QGIS Processing Framework
 #
-#	parameters.py (C) Camilo Polymeris
+#	__init__.py (C) Camilo Polymeris
 #	
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
@@ -18,6 +18,8 @@
 #   along with this program; if not, write to the Free Software
 #   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 #   MA 02110-1301, USA.
+
+from gui import Panel
 
 class Tag(str):
     """ Case insensitive strings for tag usage. """
@@ -37,6 +39,11 @@ class Tag(str):
 class Framework:
     def __init__(self):
         self._modules = set()
+    def updateGui(self, iface):
+        if iface:
+            self._panel = Panel(self, iface)
+        else:
+            del self._panel
     def registerLibrary(self, library):
         """ Register library with the framework.
         Adds the libraries modules to the framework's list.
@@ -71,10 +78,10 @@ class Framework:
     def representativeTags(self):
         """ Returns list of tags that aren't too frequent or to infrequent
         to be representative.
-        That is, cut tags that only apply to 5% of the modules or to
-        more than 80%.
+        That is, cut tags that only apply to 1% of the modules or to
+        more than 25%.
         """
-        criterion = lambda (_, v): v > 0.05 and v < 0.80
+        criterion = lambda (_, v): v > 0.02 and v < 0.25
         tags = self.tagFrequency().items()
         tags, _ = zip(*filter(criterion, tags))
         return tags
@@ -98,7 +105,7 @@ class Plugin:
         self._iface = iface
         self._libraries = libraries
     def initGui(self):
-        pass
+        framework.updateGui(self._iface)
     def unload(self):
         pass
 
