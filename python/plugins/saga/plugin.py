@@ -25,6 +25,7 @@ from qgis.core import *
 
 import os
 import processing
+import processing.parameters
 import saga_api as saga
 
 def getLibraryPaths():
@@ -91,3 +92,7 @@ class Module(processing.Module):
             self.module.Get_Description())
     def tags(self):
         return processing.Module.tags(self) | set([processing.Tag('saga')])
+
+class Parameter(processing.parameters.Parameter):
+    pass
+

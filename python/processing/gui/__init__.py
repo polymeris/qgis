@@ -37,32 +37,42 @@ class Panel(QDockWidget, Ui_dock):
 			SIGNAL("itemActivated(QTreeWidgetItem *, int)"),
 			self.onItemActivated)
         self.setFloating(False)
+    ## The TreeWidget's items:
+    class TagItem(QTreeWidgetItem):
+        """ First hierarchical level: order by tags """
+        def __init__(self, parent, tag = "other"):
+            QTreeWidgetItem.__init__(self, parent, [tag])
+    class ModuleItem(QTreeWidgetItem):
+        """ Second hierarchical level: modules by name """
+        def __init__(self, module):
+            QTreeWidgetItem.__init__(self,[module.name()])
+            self._module = module
+        def module(self):
+            return self._module
     def buildModuleList(self, tags):
+        """ Construct the tree of modules. """
         topNode = self.moduleList
         # a set of modules not yet added to the list
         pending = set(self._framework.modules())
         # add a node for each tag
         for tag in tags:
-            tagNode = QTreeWidgetItem(topNode, [tag])
+            tagNode = Panel.TagItem(topNode, tag)
             # and its children
             for mod in self._framework.modulesByTag(tag):
-                self.addModuleToList(tagNode, mod)
+                modNode = Panel.ModuleItem(mod)
+                tagNode.addChild(modNode)
                 pending.discard(mod)
         # add non-tagged modules
-        tagNode = QTreeWidgetItem(topNode, ["other"])
+        tagNode = Panel.TagItem(topNode)
         for mod in pending:
-            self.addModuleToList(tagNode, mod)
-    def addModuleToList(self, parent, module):
-        item = QTreeWidgetItem(parent, [module.name()])
-        # pointer to the module stored with the item
-        item.setData(1, Qt.UserRole, module)
+            modNode = Panel.ModuleItem(mod)
+            tagNode.addChild(modNode)
     def onItemActivated(self, item, _):
-        module = item.data(1, Qt.UserRole).value()
-        dialog = Dialog(self._iface, module)
+        """ This slot pops up the relevant dialog. """
+        dialog = Dialog(self._iface, item.module())
         self._dialogs.append(dialog)
         dialog.show()
 
 class Dialog(QDialog, Ui_runDialog):
     def __init__(self, iface, module):
-        print "Create dialog for module " + module.name()
         pass
