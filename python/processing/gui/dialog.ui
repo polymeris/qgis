@@ -11,11 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Run SAGA module </string>
-  </property>
-  <property name="windowIcon">
-   <iconset>
-    <normaloff>:/sagamodules/saga.png</normaloff>:/sagamodules/saga.png</iconset>
+   <string>Run Processing module </string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
@@ -44,16 +40,6 @@
        <width>16777215</width>
        <height>64</height>
       </size>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QLabel" name="logo">
-     <property name="pixmap">
-      <pixmap>:/sagamodules/saga.png</pixmap>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </item>
