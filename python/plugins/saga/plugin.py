@@ -90,9 +90,32 @@ class Module(processing.Module):
         processing.Module.__init__(self,
             self.module.Get_Name(),
             self.module.Get_Description())
+
+        for i in range(self.module.Get_Parameters_Count()):
+            params = self.module.Get_Parameters(i)
+            print params.Get_Name() + " - " + params.Get_Identifier()
+            for j in range(params.Get_Count()):
+                self.addParameter(params.Get_Parameter(j))
+    def addParameter(self, sagaParam):
+        sagaToQGisParam = {
+            saga.PARAMETER_TYPE_Int:
+                processing.parameters.NumericParameter,
+            saga.PARAMETER_TYPE_Double:
+                processing.parameters.NumericParameter,
+            saga.PARAMETER_TYPE_Degree:
+                processing.parameters.NumericParameter
+        }
+        name = sagaParam.Get_Name()
+        descr = sagaParam.Get_Description()
+        typ = sagaParam.Get_Type()
+        try:
+            qgisParam = sagaToQGisParam[typ]
+            self._parameters.add(qgisParam(name, descr))
+            print "Added parameter " + name
+        except KeyError:
+            print name + " is of unhandled parameter type."
+                
     def tags(self):
         return processing.Module.tags(self) | set([processing.Tag('saga')])
 
-class Parameter(processing.parameters.Parameter):
-    pass
 
