@@ -75,4 +75,6 @@ class Panel(QDockWidget, Ui_dock):
 
 class Dialog(QDialog, Ui_runDialog):
     def __init__(self, iface, module):
-        pass
+        QDialog.__init__(self, iface.mainWindow())
+        self.setupUi(self)
+        self.setWindowTitle(self.windowTitle() + " - " + module.name())
