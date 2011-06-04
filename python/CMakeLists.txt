@@ -1,4 +1,5 @@
-ADD_SUBDIRECTORY(processing plugins)
+ADD_SUBDIRECTORY(processing)
+ADD_SUBDIRECTORY(plugins)
 
 IF (WITH_INTERNAL_SPATIALITE)
   ADD_SUBDIRECTORY(pyspatialite)
