@@ -20,6 +20,7 @@
 #   MA 02110-1301, USA.
 
 from PyQt4.QtGui import QDockWidget, QTreeWidgetItem, QDialog
+from PyQt4.QtGui import QSpinBox
 from PyQt4.QtCore import QObject, SIGNAL, Qt
 from ui_dialog import Ui_runDialog
 from ui_panel import Ui_dock
@@ -81,3 +82,24 @@ class Dialog(QDialog, Ui_runDialog):
         self.setupUi(self)
         self.setWindowTitle(self.windowTitle() + " - " + module.name())
         self.moduleinstance = processing.ModuleInstance(module)
+        print self.moduleinstance.module().parameters()
+        for param in self.moduleinstance.parameters():
+            print param
+            value = self.moduleinstance[param]
+            print value
+            widget = self.widgetByType(param, value)
+            if widget:
+                self.form.addRow(param.name(), widget)
+    def widgetByType(self, param, value):
+        try:
+            return param.widget(param, value)
+        except AttributeError:
+            pass
+        try:
+            typToWidget = {
+                processing.parameters.NumericParameter: QSpinBox(None)
+                }
+            print "Type:" + str(typToWidget[param.type()])
+            return typToWidget[param.type()]
+        except KeyError:
+            return None

@@ -47,7 +47,8 @@ class SAGAPlugin(processing.Plugin):
             try:
                 libraries.append(Library(p))
             except InvalidLibrary:
-                print "Invalid library."
+                #print "Invalid library."
+                pass
         processing.Plugin.__init__(self, iface, libraries)
 
 class InvalidLibrary(RuntimeError):
@@ -56,7 +57,7 @@ class InvalidLibrary(RuntimeError):
         
 class Library(processing.Library):
     def __init__(self, filename):
-        print filename
+        #print filename
         lib = saga.CSG_Module_Library(saga.CSG_String(filename))
         if not lib.is_Valid():
             raise InvalidLibrary(filename)
@@ -65,7 +66,8 @@ class Library(processing.Library):
             try:
                 modules.append(Module(lib, i))
             except InvalidModule:
-                print "Invalid module."
+                #print "Invalid module."
+                pass
         processing.Library.__init__(self,
             lib.Get_Name().c_str(), lib.Get_Description().c_str(),
             modules)
@@ -93,7 +95,7 @@ class Module(processing.Module):
 
         for i in range(self.module.Get_Parameters_Count()):
             params = self.module.Get_Parameters(i)
-            print params.Get_Name() + " - " + params.Get_Identifier()
+            #print params.Get_Name() + " - " + params.Get_Identifier()
             for j in range(params.Get_Count()):
                 self.addParameter(params.Get_Parameter(j))
     def addParameter(self, sagaParam):
@@ -113,8 +115,11 @@ class Module(processing.Module):
             self._parameters.add(qgisParam(name, descr))
             print "Added parameter " + name
         except KeyError:
-            print name + " is of unhandled parameter type."
-                
+            #print name + " is of unhandled parameter type."
+            pass
+    def parameters(self):
+        print self._parameters
+        return self._parameters
     def tags(self):
         return processing.Module.tags(self) | set([processing.Tag('saga')])
 

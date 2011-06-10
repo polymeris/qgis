@@ -46,8 +46,8 @@ class Parameter:
     def isMandatory(self):
         return False
     def defaultValue(self):
-        if self._default is not None:
-            return self._default
+        if self._defaultValue is not None:
+            return self._defaultValue
         else:
             return self.type()()
     def validator(self):
