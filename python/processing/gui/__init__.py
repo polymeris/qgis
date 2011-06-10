@@ -70,9 +70,10 @@ class Panel(QDockWidget, Ui_dock):
             tagNode.addChild(modNode)
     def onItemActivated(self, item, _):
         """ This slot pops up the relevant dialog. """
-        dialog = Dialog(self._iface, item.module())
-        self._dialogs.append(dialog)
-        dialog.show()
+        if type(item) is Panel.ModuleItem:
+            dialog = Dialog(self._iface, item.module())
+            self._dialogs.append(dialog)
+            dialog.show()
 
 class Dialog(QDialog, Ui_runDialog):
     def __init__(self, iface, module):

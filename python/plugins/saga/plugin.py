@@ -37,7 +37,7 @@ def getLibraryPaths():
     for p in paths:
         print "Seaching SAGA modules in " + p + "."
         if os.path.exists(p):
-            return [p + fn for fn in os.listdir(p)]
+            return [p + '/' + fn for fn in os.listdir(p)]
     raise RuntimeError("No SAGA modules found.")
 
 class SAGAPlugin(processing.Plugin):
