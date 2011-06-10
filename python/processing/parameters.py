@@ -19,6 +19,8 @@
 #   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 #   MA 02110-1301, USA.
 
+import PyQt4.QtGui as QtGui
+
 class Parameter:
     class Role:
         input, output, option, feedback = 1, 2, 3, 4
@@ -48,14 +50,8 @@ class Parameter:
             return self._default
         else:
             return self.type()()
-    def value(self):
-        raise NotImplementedError(
-        "Parameter is an abstract base class. "
-        "The value() method must be implemented by subclasses.")
-    def setValue(self, _):
-        raise NotImplementedError(
-        "Parameter is an abstract base class. "
-        "The setValue(value) method must be implemented by subclasses.")
+    def validator(self):
+        return None
 
 class ParameterList(Parameter):
     def __init__(self, name, description = None,
@@ -68,7 +64,5 @@ class NumericParameter(Parameter):
 				 defaultValue = 0.0, role = None):
         Parameter.__init__(self, name, float, description,
 				 defaultValue, role)
-
-import PyQt4.QtGui as QtGui
 
 Validator = QtGui.QValidator

@@ -23,6 +23,7 @@ from PyQt4.QtGui import QDockWidget, QTreeWidgetItem, QDialog
 from PyQt4.QtCore import QObject, SIGNAL, Qt
 from ui_dialog import Ui_runDialog
 from ui_panel import Ui_dock
+import processing
 
 class Panel(QDockWidget, Ui_dock):
     def __init__(self, framework, iface):
@@ -78,3 +79,4 @@ class Dialog(QDialog, Ui_runDialog):
         QDialog.__init__(self, iface.mainWindow())
         self.setupUi(self)
         self.setWindowTitle(self.windowTitle() + " - " + module.name())
+        self.moduleinstance = processing.ModuleInstance(module)
