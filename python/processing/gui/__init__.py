@@ -82,24 +82,24 @@ class Dialog(QDialog, Ui_runDialog):
         self.setupUi(self)
         self.setWindowTitle(self.windowTitle() + " - " + module.name())
         self.moduleinstance = processing.ModuleInstance(module)
-        print self.moduleinstance.module().parameters()
-        for param in self.moduleinstance.parameters():
-            print param
-            value = self.moduleinstance[param]
-            print value
+        self._widgets = set()
+        for param, value in self.moduleinstance.parameters().items():
             widget = self.widgetByType(param, value)
-            if widget:
+            self._widgets.add(widget)
+            if widget is not None:
+                print param.name()
                 self.form.addRow(param.name(), widget)
+                print self.form.count()
     def widgetByType(self, param, value):
         try:
             return param.widget(param, value)
         except AttributeError:
             pass
         try:
+            print param.__class__
             typToWidget = {
                 processing.parameters.NumericParameter: QSpinBox(None)
                 }
-            print "Type:" + str(typToWidget[param.type()])
-            return typToWidget[param.type()]
+            return typToWidget[param.__class__]
         except KeyError:
             return None
