@@ -5,6 +5,7 @@ ADD_SUBDIRECTORY(gui)
 SET (INSTALL_FILES
     __init__.py
     parameters.py
+    moduleinstance.py
     )
 
 INSTALL(FILES ${INSTALL_FILES} DESTINATION ${QGIS_PROCESSING_FRAMEWORK_DIR})
