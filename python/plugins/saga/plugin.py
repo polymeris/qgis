@@ -113,7 +113,7 @@ class Module(processing.Module):
         try:
             qgisParam = sagaToQGisParam[typ]
             self._parameters.add(qgisParam(name, descr))
-            print "Added parameter " + name
+            #print "Added parameter " + name
         except KeyError:
             #print name + " is of unhandled parameter type."
             pass

@@ -18,15 +18,15 @@
 #   along with this program; if not, write to the Free Software
 #   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 #   MA 02110-1301, USA.
-from plugin import OTBPlugin
-
-theOTBPlugin = None
+from processing import framework
+from PyQt4.QtCore import *
+from PyQt4.QtGui import *
 
 def name():
-    return "Orfeo Toolbox Module interface"
+    return "Processing Framework Module"
 
 def description():
-    return "Run the versatile OTB modules. OTB must be installed"
+    return "QGis Processing Framework Manager"
     
 def icon():
     return "saga.png"
@@ -38,11 +38,28 @@ def qgisMinimumVersion():
     return "1.0"
     
 def authorName():
-    return "Julien Malik"
-    
+    return "Camilo Polymeris"
+
+class ProcessingPlugin:
+    """ Processing plugin
+    """
+    def __init__(self, iface):
+        self._iface = iface
+    def initGui(self):
+        self.menu = QMenu()
+        self.menu.setTitle(QCoreApplication.translate("Processing", "Processing"))
+        self.panel = QAction(QCoreApplication.translate("Processing", "&Panel"), self._iface.mainWindow())
+        self.menu.addActions([self.panel])
+        QObject.connect(self.panel, SIGNAL("triggered()"), self.showPanel)
+        menu_bar = self._iface.mainWindow().menuBar()
+        actions = menu_bar.actions()
+        lastAction = actions[len(actions) - 1]
+        menu_bar.insertMenu(lastAction, self.menu)
+    def unload(self):
+        pass
+    def showPanel(self):
+        framework.updateGui(self._iface)
+
 def classFactory(iface):
-    global theOTBPlugin
-    if not theOTBPlugin :
-      theOTBPlugin = OTBPlugin(iface)
-    return theOTBPlugin
-    
+    return ProcessingPlugin(iface)
+

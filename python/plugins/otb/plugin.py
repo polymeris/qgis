@@ -51,11 +51,10 @@ class OTBPlugin(processing.Plugin):
 class InvalidModule(RuntimeError):
     def __init__(self, name):
         RuntimeError.__init__(self, "Module invalid " + name + ".")
-            
+        
 class OTBModule(processing.Module):
     def __init__(self, modulename):
         self.app = otb.Registry.CreateApplication(modulename)
-        print dir(self.app)
         processing.Module.__init__(self,
             self.app.GetName(),
             self.app.GetDescription())
@@ -70,11 +69,8 @@ class OTBModule(processing.Module):
         }
         
         name = otbParamKey
-        print name
         descr = self.app.GetParameterName(otbParamKey)
-        print descr
         typ = self.app.GetParameterType(otbParamKey)
-        print typ
         try:
             qgisParam = otbToQGisParam[typ]
             self._parameters.add(qgisParam(name, descr))
