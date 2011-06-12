@@ -27,13 +27,12 @@ from ui_panel import Ui_dock
 import processing
 
 class Panel(QDockWidget, Ui_dock):
-    def __init__(self, framework, iface):
+    def __init__(self, iface):
         QDockWidget.__init__(self, iface.mainWindow())
-        self._framework = framework
         self._iface = iface
         self._dialogs = list()
         self.setupUi(self)
-        tags = framework.representativeTags()
+        tags = processing.framework.representativeTags()
         self.buildModuleList(tags)
     	QObject.connect(self.moduleList,
 			SIGNAL("itemActivated(QTreeWidgetItem *, int)"),
@@ -57,13 +56,13 @@ class Panel(QDockWidget, Ui_dock):
         topNode = self.moduleList
         topNode.clear()
         # a set of modules not yet added to the list
-        pending = set(self._framework.modules())
+        pending = set(processing.framework.modules())
         # add a node for each tag
         for tag in tags:
             tagNode = Panel.TagItem(topNode, tag)
             # and its children
             #, sorted alphabetically
-            modules = sorted(self._framework.modulesByTag(tag),
+            modules = sorted(processing.framework.modulesByTag(tag),
                 key=lambda x: x.name())
             for mod in modules:
                 modNode = Panel.ModuleItem(mod)

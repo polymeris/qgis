@@ -41,22 +41,6 @@ class Tag(str):
 class Framework:
     def __init__(self):
         self._modules = set()
-    def updateGui(self, iface, visible = True):
-        try:
-            self._panel
-            ## TODO. Update existing panel.
-            return
-        except:
-            pass
-        if iface:
-            self._panel = Panel(self, iface)
-        else:
-            del self._panel
-    def panel(self):
-        try:
-            return self._panel
-        except AttributeError:
-            return None
     def registerLibrary(self, library):
         """ Register library with the framework.
         Adds the libraries modules to the framework's list.

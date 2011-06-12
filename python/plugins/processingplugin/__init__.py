@@ -20,6 +20,7 @@
 #   MA 02110-1301, USA.
 
 from processing import framework
+from processing.gui import Panel
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
@@ -63,8 +64,7 @@ class ProcessingPlugin:
         pass
     def showPanel(self, visible = True):
         if not self.panel:
-            framework.updateGui(self._iface)
-            self.panel = framework.panel()
+            self.panel = Panel(self._iface)
             QObject.connect(self.panel,
                 SIGNAL("visiblityChanged(bool)"), self.action.setChecked)
         self.panel.setVisible(visible)
