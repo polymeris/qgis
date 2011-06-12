@@ -113,7 +113,7 @@ class Library:
         self._name = name
         self._description = description
         self._modules = set(modules)
-        print "Loading library " + name
+        #print "Loading library " + name
         framework.registerLibrary(self)
     def name(self):
         return self._name

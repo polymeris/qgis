@@ -35,7 +35,7 @@ def getLibraryPaths():
         paths = ['/usr/lib/saga/', '/usr/local/lib/saga/']
         print "MLB_PATH not set."
     for p in paths:
-        print "Seaching SAGA modules in " + p + "."
+        #print "Seaching SAGA modules in " + p + "."
         if os.path.exists(p):
             return [p + '/' + fn for fn in os.listdir(p)]
     raise RuntimeError("No SAGA modules found.")
@@ -113,12 +113,10 @@ class Module(processing.Module):
         try:
             qgisParam = sagaToQGisParam[typ]
             self._parameters.add(qgisParam(name, descr))
-            print "Added parameter " + name
         except KeyError:
             #print name + " is of unhandled parameter type."
             pass
     def parameters(self):
-        print self._parameters
         return self._parameters
     def tags(self):
         return processing.Module.tags(self) | set([processing.Tag('saga')])

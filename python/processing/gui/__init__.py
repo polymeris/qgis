@@ -91,16 +91,13 @@ class Dialog(QDialog, Ui_runDialog):
             widget = self.widgetByType(param, value)
             self._widgets.add(widget)
             if widget is not None:
-                print param.name()
                 self.form.addRow(param.name(), widget)
-                print self.form.count()
     def widgetByType(self, param, value):
         try:
             return param.widget(param, value)
         except AttributeError:
             pass
         try:
-            print param.__class__
             typToWidget = {
                 processing.parameters.NumericParameter: QSpinBox(None)
                 }
