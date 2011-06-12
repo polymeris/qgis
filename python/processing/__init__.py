@@ -44,6 +44,7 @@ class Framework:
     def updateGui(self, iface):
         if iface:
             self._panel = Panel(self, iface)
+            self._panel.show()
         else:
             del self._panel
     def registerLibrary(self, library):
@@ -107,7 +108,8 @@ class Plugin:
         self._iface = iface
         self._libraries = libraries
     def initGui(self):
-        framework.updateGui(self._iface)
+        pass
+        #framework.updateGui(self._iface)
     def unload(self):
         pass
 

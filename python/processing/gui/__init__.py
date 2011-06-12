@@ -39,6 +39,7 @@ class Panel(QDockWidget, Ui_dock):
 			SIGNAL("itemActivated(QTreeWidgetItem *, int)"),
 			self.onItemActivated)
         self.setFloating(False)
+        self._iface.addDockWidget( Qt.RightDockWidgetArea, self )
     ## The TreeWidget's items:
     class TagItem(QTreeWidgetItem):
         """ First hierarchical level: order by tags """

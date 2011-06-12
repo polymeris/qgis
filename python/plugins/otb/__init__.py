@@ -18,14 +18,15 @@
 #   along with this program; if not, write to the Free Software
 #   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 #   MA 02110-1301, USA.
-from plugin import SAGAPlugin
-theSAGAPlugin = None
+from plugin import OTBPlugin
+
+theOTBPlugin = None
 
 def name():
-    return "SAGA Module interface"
+    return "Orfeo Toolbox Module interface"
 
 def description():
-    return "Run the versatile SAGA modules. SAGA must be installed"
+    return "Run the versatile OTB modules. OTB must be installed"
     
 def icon():
     return "saga.png"
@@ -37,10 +38,11 @@ def qgisMinimumVersion():
     return "1.0"
     
 def authorName():
-    return "Camilo Polymeris"
+    return "Julien Malik"
     
 def classFactory(iface):
-    global theSAGAPlugin
-    if not theSAGAPlugin :
-      theSAGAPlugin = SAGAPlugin(iface)
-    return theSAGAPlugin
+    global theOTBPlugin
+    if not theOTBPlugin :
+      theOTBPlugin = OTBPlugin(iface)
+    return theOTBPlugin
+    
