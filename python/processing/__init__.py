@@ -41,11 +41,11 @@ class Tag(str):
 class Framework:
     def __init__(self):
         self._modules = set()
-    def registerLibrary(self, library):
-        """ Register library with the framework.
-        Adds the libraries modules to the framework's list.
+    def registerModule(self, module):
+        """ Register module(s) with the framework.
+        Adds the modules to the framework's list.
         """
-        self._modules = self._modules | library.modules()
+        self._modules = self._modules | set(module)
     def modules(self):
         """ Returns complete list of registered modules."""
         return self._modules
@@ -105,22 +105,6 @@ class Plugin:
         pass
     def unload(self):
         pass
-
-# is this class necessary/useful? Perhaps move this functionality to
-# plugin.
-class Library:
-    def __init__(self, name, description = None, modules = []):
-        self._name = name
-        self._description = description
-        self._modules = set(modules)
-        #print "Loading library " + name
-        framework.registerLibrary(self)
-    def name(self):
-        return self._name
-    def description(self):
-        return self._description
-    def modules(self):
-        return self._modules
 
 class Module:
     """ A processing module. """

@@ -55,7 +55,7 @@ class InvalidLibrary(RuntimeError):
     def __init__(self, name):
         RuntimeError.__init__(self, "Library invalid " + name + ".")
         
-class Library(processing.Library):
+class Library:
     def __init__(self, filename):
         #print filename
         lib = saga.CSG_Module_Library(saga.CSG_String(filename))
@@ -68,9 +68,7 @@ class Library(processing.Library):
             except InvalidModule:
                 #print "Invalid module."
                 pass
-        processing.Library.__init__(self,
-            lib.Get_Name().c_str(), lib.Get_Description().c_str(),
-            modules)
+        processing.framework.registerModule(modules)
 
 class InvalidModule(RuntimeError):
     def __init__(self, name):
