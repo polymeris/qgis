@@ -60,13 +60,16 @@ class Panel(QDockWidget, Ui_dock):
         for tag in tags:
             tagNode = Panel.TagItem(topNode, tag)
             # and its children
-            for mod in self._framework.modulesByTag(tag):
+            #, sorted alphabetically
+            modules = sorted(self._framework.modulesByTag(tag),
+                key=lambda x: x.name())
+            for mod in modules:
                 modNode = Panel.ModuleItem(mod)
                 tagNode.addChild(modNode)
                 pending.discard(mod)
         # add non-tagged modules
         tagNode = Panel.TagItem(topNode)
-        for mod in pending:
+        for mod in sorted(pending, key=lambda x: x.name()):
             modNode = Panel.ModuleItem(mod)
             tagNode.addChild(modNode)
     def onItemActivated(self, item, _):
