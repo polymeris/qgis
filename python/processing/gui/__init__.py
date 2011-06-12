@@ -39,6 +39,7 @@ class Panel(QDockWidget, Ui_dock):
 			SIGNAL("itemActivated(QTreeWidgetItem *, int)"),
 			self.onItemActivated)
         self.setFloating(False)
+        self._iface.addDockWidget(Qt.RightDockWidgetArea, self)
     ## The TreeWidget's items:
     class TagItem(QTreeWidgetItem):
         """ First hierarchical level: order by tags """
@@ -54,6 +55,7 @@ class Panel(QDockWidget, Ui_dock):
     def buildModuleList(self, tags):
         """ Construct the tree of modules. """
         topNode = self.moduleList
+        topNode.clear()
         # a set of modules not yet added to the list
         pending = set(self._framework.modules())
         # add a node for each tag
