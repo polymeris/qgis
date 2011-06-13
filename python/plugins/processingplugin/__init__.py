@@ -60,7 +60,7 @@ class ProcessingPlugin:
         menuBar = self._iface.mainWindow().menuBar()
         menuBar.insertMenu(menuBar.actions()[-1], self.menu)
     def unload(self):
-        pass
+        self.panel.setVisible(False)
     def showPanel(self, visible = True):
         if not self.panel:
             self.panel = Panel(self._iface)
