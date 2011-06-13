@@ -97,9 +97,8 @@ class Plugin:
     Partially overrides the QGIS plugin interface.
     Subclass this when implementing your own processing plugin.
     """
-    def __init__(self, iface, libraries):
+    def __init__(self, iface):
         self._iface = iface
-        self._libraries = libraries
     def initGui(self):
         pass
     def unload(self):
