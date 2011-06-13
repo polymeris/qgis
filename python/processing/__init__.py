@@ -21,7 +21,6 @@
 
 import moduleinstance
 ModuleInstance = moduleinstance.ModuleInstance
-from gui import Panel
 
 class Tag(str):
     """ Case insensitive strings for tag usage. """
