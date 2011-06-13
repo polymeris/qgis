@@ -20,7 +20,7 @@
 #   MA 02110-1301, USA.
 
 from processing import framework
-from processing.gui import Panel
+from ui import Panel
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 

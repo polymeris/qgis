@@ -1,7 +1,5 @@
 SET (QGIS_PROCESSING_FRAMEWORK_DIR ${PYTHON_SITE_PACKAGES_DIR}/processing)
 
-ADD_SUBDIRECTORY(gui)
-
 SET (INSTALL_FILES
     __init__.py
     parameters.py
