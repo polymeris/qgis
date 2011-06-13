@@ -49,7 +49,7 @@ class SAGAPlugin(processing.Plugin):
             except InvalidLibrary:
                 #print "Invalid library."
                 pass
-        processing.Plugin.__init__(self, iface, libraries)
+        processing.Plugin.__init__(self, iface)
 
 class InvalidLibrary(RuntimeError):
     def __init__(self, name):
