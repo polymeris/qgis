@@ -21,8 +21,8 @@
 
 from processing import framework
 from ui import Panel
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQt4.QtCore import QObject, SIGNAL
+from PyQt4.QtGui import QAction, QMenu
 
 def name():
     return "Processing Framework Module"
@@ -50,23 +50,23 @@ class ProcessingPlugin:
         self.panel = None
     def initGui(self):
         self.menu = QMenu()
-        self.menu.setTitle(QCoreApplication.translate("Processing", "Processing"))
-        self.action = QAction(QCoreApplication.translate("Processing", "&Panel"), self._iface.mainWindow())
-        self.action.setCheckable(True)
-        self.menu.addActions([self.action])
-        QObject.connect(self.action,
+        self.menu.setTitle(self.menu.tr("Processing", "Processing"))
+        self.panelAction = QAction(self.menu.tr("&Panel", "Processing"),
+            self._iface.mainWindow())
+        self.panelAction.setCheckable(True)
+        self.menu.addAction(self.panelAction)
+        QObject.connect(self.panelAction,
             SIGNAL("triggered(bool)"), self.showPanel)
-        menu_bar = self._iface.mainWindow().menuBar()
-        actions = menu_bar.actions()
-        lastAction = actions[len(actions) - 1]
-        menu_bar.insertMenu(lastAction, self.menu)
+        menuBar = self._iface.mainWindow().menuBar()
+        menuBar.insertMenu(menuBar.actions()[-1], self.menu)
     def unload(self):
         pass
     def showPanel(self, visible = True):
         if not self.panel:
             self.panel = Panel(self._iface)
             QObject.connect(self.panel,
-                SIGNAL("visiblityChanged(bool)"), self.action.setChecked)
+                SIGNAL("visiblityChanged(bool)"),
+                self.panelAction.setChecked)
         self.panel.setVisible(visible)
 
 def classFactory(iface):
