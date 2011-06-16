@@ -40,6 +40,19 @@ def authorName():
     return "Camilo Polymeris"
     
 def classFactory(iface):
+    try:
+        import saga_api
+    except ImportError:
+        import PyQt4.QtGui
+        window = iface.mainWindow()
+        PyQt4.QtGui.QMessageBox.warning(window,
+            window.tr("Could not find SAGA python bindings"),
+            window.tr("<html>Could not find the Python bindings for "
+                "SAGA, which are required to run the this module.<br/>"
+                "See instructions on how to install them in the "
+                "<a href=\"https://github.com/polymeris/qgis/wiki/"
+                "How-to-install-the-SAGA-Python-Bindings\">"
+                "QGIS SAGA interface wiki</a></html>"))
     from plugin import SAGAPlugin
     global theSAGAPlugin
     if not theSAGAPlugin:
