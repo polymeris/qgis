@@ -19,11 +19,6 @@
 #   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 #   MA 02110-1301, USA.
 
-from processing import framework
-from ui import Panel
-from PyQt4.QtCore import QObject, SIGNAL
-from PyQt4.QtGui import QAction, QMenu
-
 def name():
     return "Processing Framework Module"
 
@@ -49,6 +44,8 @@ class ProcessingPlugin:
         self._iface = iface
         self.panel = None
     def initGui(self):
+        from PyQt4.QtCore import QObject, SIGNAL
+        from PyQt4.QtGui import QAction, QMenu
         self.menu = QMenu()
         self.menu.setTitle(self.menu.tr("Processing", "Processing"))
         self.panelAction = QAction(self.menu.tr("&Panel", "Processing"),
@@ -60,8 +57,11 @@ class ProcessingPlugin:
         menuBar = self._iface.mainWindow().menuBar()
         menuBar.insertMenu(menuBar.actions()[-1], self.menu)
     def unload(self):
-        self.panel.setVisible(False)
+        if self.panel is not None:
+            self.panel.setVisible(False)
     def showPanel(self, visible = True):
+        from ui import Panel
+        from PyQt4.QtCore import QObject, SIGNAL
         if not self.panel:
             self.panel = Panel(self._iface)
             QObject.connect(self.panel,

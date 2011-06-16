@@ -19,7 +19,6 @@
 #   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 #   MA 02110-1301, USA.
 
-from plugin import SAGAPlugin
 theSAGAPlugin = None
 
 def name():
@@ -41,6 +40,7 @@ def authorName():
     return "Camilo Polymeris"
     
 def classFactory(iface):
+    from plugin import SAGAPlugin
     global theSAGAPlugin
     if not theSAGAPlugin:
         theSAGAPlugin = SAGAPlugin(iface)
