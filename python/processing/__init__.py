@@ -20,6 +20,7 @@
 #   MA 02110-1301, USA.
 
 import moduleinstance
+from itertools import chain
 ModuleInstance = moduleinstance.ModuleInstance
 
 class Tag(str):
@@ -39,15 +40,17 @@ class Tag(str):
 
 class Framework:
     def __init__(self):
-        self._modules = set()
-    def registerModule(self, module):
-        """ Register module(s) with the framework.
-        Adds the modules to the framework's list.
+        self._moduleProviders = set()
+    def registerModuleProvider(self, moduleprovider):
+        """ Register module providers with the framework.
+        moduleprovider must implement the modules() method,
+        which returns a list of modules.
         """
-        self._modules = self._modules | set(module)
+        self._moduleProviders.add(moduleprovider)
     def modules(self):
         """ Returns complete list of registered modules."""
-        return self._modules
+        moduleList = [set(mp.modules()) for mp in self._moduleProviders]
+        return set(chain(*moduleList))
     def modulesByTag(self, tag):
         """ Returns modules that match the tag specified."""
         tag = Tag(tag)
@@ -107,11 +110,10 @@ class Plugin:
 class Module:
     """ A processing module. """
     def __init__(self, name,
-        description = "", tags = None, parameters = []):
+        description = "", tags = None):
             self._name = name
             self._description = description
             self._tags = tags
-            self._parameters = set(parameters)
     def name(self):
         return self._name
     def description(self):
@@ -137,6 +139,6 @@ class Module:
     def parameters(self):
         """ The modules parameters.
         Specifiy on construction or override this method to provide your
-        own. Returns empty set if neither is done.
+        own. Else raises an NotImplementedError.
         """
-        return self._parameters
+        raise NotImplementedError

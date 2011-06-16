@@ -42,12 +42,12 @@ def getLibraryPaths():
 
 class SAGAPlugin(processing.Plugin):
     def __init__(self, iface):
-        libraries = list()
+        self.libraries = list()
+        self._modules = None
         for p in getLibraryPaths():
             try:
-                libraries.append(Library(p))
+                self.libraries.append(Library(p))
             except InvalidLibrary:
-                #print "Invalid library."
                 pass
         processing.Plugin.__init__(self, iface)
 
@@ -57,18 +57,21 @@ class InvalidLibrary(RuntimeError):
         
 class Library:
     def __init__(self, filename):
-        #print filename
-        lib = saga.CSG_Module_Library(saga.CSG_String(filename))
-        if not lib.is_Valid():
+        self.sagalib = saga.CSG_Module_Library(saga.CSG_String(filename))
+        if not self.sagalib.is_Valid():
             raise InvalidLibrary(filename)
-        modules = list()
-        for i in range(lib.Get_Count()):
+        self._modules = None
+        processing.framework.registerModuleProvider(self)
+    def modules(self):
+        if self._modules is not None:
+            return self._modules
+        self._modules = set()
+        for i in range(self.sagalib.Get_Count()):
             try:
-                modules.append(Module(lib, i))
+                self._modules.add(Module(self.sagalib, i))
             except InvalidModule:
-                #print "Invalid module."
                 pass
-        processing.framework.registerModule(modules)
+        return self._modules
 
 class InvalidModule(RuntimeError):
     def __init__(self, name):
@@ -90,12 +93,6 @@ class Module(processing.Module):
         processing.Module.__init__(self,
             self.module.Get_Name(),
             self.module.Get_Description())
-
-        for i in range(self.module.Get_Parameters_Count()):
-            params = self.module.Get_Parameters(i)
-            #print params.Get_Name() + " - " + params.Get_Identifier()
-            for j in range(params.Get_Count()):
-                self.addParameter(params.Get_Parameter(j))
     def addParameter(self, sagaParam):
         sagaToQGisParam = {
             saga.PARAMETER_TYPE_Int:
@@ -112,9 +109,14 @@ class Module(processing.Module):
             qgisParam = sagaToQGisParam[typ]
             self._parameters.add(qgisParam(name, descr))
         except KeyError:
-            #print name + " is of unhandled parameter type."
             pass
     def parameters(self):
+        if self._parameters is not None:
+            return self._parameters
+        for i in range(self.module.Get_Parameters_Count()):
+            params = self.module.Get_Parameters(i)
+            for j in range(params.Get_Count()):
+                self.addParameter(params.Get_Parameter(j))
         return self._parameters
     def tags(self):
         return processing.Module.tags(self) | set([processing.Tag('saga')])
