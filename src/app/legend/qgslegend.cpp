@@ -138,6 +138,8 @@ void QgsLegend::showItem( QString msg, QTreeWidgetItem *item )
 
 void QgsLegend::handleCurrentItemChanged( QTreeWidgetItem* current, QTreeWidgetItem* previous )
 {
+  Q_UNUSED( current );
+  Q_UNUSED( previous );
   QgsMapLayer *layer = currentLayer();
 
   if ( mMapCanvas )
@@ -556,8 +558,10 @@ void QgsLegend::mouseReleaseEvent( QMouseEvent * e )
   checkLayerOrderUpdate();
 }
 
-void QgsLegend::mouseDoubleClickEvent( QMouseEvent* e )
+void QgsLegend::mouseDoubleClickEvent( QMouseEvent *e )
 {
+  Q_UNUSED( e );
+
   QSettings settings;
 
   switch ( settings.value( "/qgis/legendDoubleClickAction", 0 ).toInt() )
@@ -699,7 +703,7 @@ QgsLegendGroup* QgsLegend::addEmbeddedGroup( const QString& groupName, const QSt
           QString layerId = childElem.firstChildElement( "filegroup" ).firstChildElement( "legendlayerfile" ).attribute( "layerid" );
           QgsProject::instance()->createEmbeddedLayer( layerId, projectFilePath, brokenNodes, vectorLayerList, false );
           QTreeWidgetItem* cItem = 0;
-          if( settings.value("/qgis/addNewLayersToCurrentGroup", false ).toBool() )
+          if ( settings.value( "/qgis/addNewLayersToCurrentGroup", false ).toBool() )
           {
             cItem = group->takeChild( 0 );
           }
@@ -776,8 +780,8 @@ void QgsLegend::addLayer( QgsMapLayer * layer )
   }
 
   setItemExpanded( llayer, true );
-
-  refreshLayerSymbology( layer->id() );
+  //don't expand raster items by default, there could be too many
+  refreshLayerSymbology( layer->id(), layer->type() != QgsMapLayer::RasterLayer );
 
   updateMapCanvasLayerSet();
 
@@ -1588,9 +1592,13 @@ void QgsLegend::moveItem( QTreeWidgetItem* move, QTreeWidgetItem* after )
 {
   QgsDebugMsg( QString( "Moving layer : %1 (%2)" ).arg( move->text( 0 ) ).arg( move->type() ) );
   if ( after )
+  {
     QgsDebugMsg( QString( "after layer  : %1 (%2)" ).arg( after->text( 0 ) ).arg( after->type() ) );
+  }
   else
+  {
     QgsDebugMsg( "as toplevel item" );
+  }
 
   static_cast<QgsLegendItem*>( move )->storeAppearanceSettings();//store settings in the moved item and its childern
 
@@ -1723,10 +1731,7 @@ void QgsLegend::refreshLayerSymbology( QString key, bool expandItem )
   //restore the current item again
   setCurrentIndex( currentItemIndex );
   adjustIconSize();
-  if ( expandItem )
-  {
-    setItemExpanded( theLegendLayer, true );//make sure the symbology items are visible
-  }
+  setItemExpanded( theLegendLayer, expandItem );//make sure the symbology items are visible
 }
 
 
@@ -1763,6 +1768,8 @@ void QgsLegend::removePixmapHeightValue( int height )
 
 void QgsLegend::handleItemChange( QTreeWidgetItem* item, int column )
 {
+  Q_UNUSED( column );
+
   if ( !item )
   {
     return;

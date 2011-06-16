@@ -73,6 +73,7 @@ class CORE_EXPORT QgsLogger
     template <typename T> static void debug( const QString& var, T val, const char* file = 0, const char* function = 0,
         int line = -1, int debuglevel = 1 )
     {
+      Q_UNUSED( debuglevel );
       const char* dfile = debugFile();
       if ( dfile ) //exit if QGIS_DEBUG_FILE is set and the message comes from the wrong file
       {
@@ -110,13 +111,13 @@ class CORE_EXPORT QgsLogger
      the function returns 1 if QGISDEBUG is defined and 0 if not*/
     static int debugLevel();
 
+    /** Logs the message passed in to the logfile defined in QGIS_LOG_FILE if any. **/
+    static void logMessageToFile( QString theMessage );
+
   private:
     /**Reads the environment variable QGIS_LOG_FILE. Returns NULL if the variable is not set,
      * otherwise returns a file name for writing log messages to.*/
     static const QString logFile();
-
-    /** Logs the message passed in to the logfile defined in QGIS_LOG_FILE if any. **/
-    static const void logMessageToFile( QString theMessage );
 
     /**Reads the environment variable QGIS_DEBUG_FILE. Returns NULL if the variable is not set.
      * If set, only messages from this source file will be sent to logs. */
