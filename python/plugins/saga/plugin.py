@@ -40,8 +40,8 @@ def getLibraryPaths():
             return [p + '/' + fn for fn in os.listdir(p)]
     raise RuntimeError("No SAGA modules found.")
 
-class SAGAPlugin(processing.Plugin):
-    def __init__(self, iface):
+class SAGAPlugin:
+    def __init__(self, _):
         self.libraries = list()
         self._modules = None
         for p in getLibraryPaths():
@@ -49,7 +49,10 @@ class SAGAPlugin(processing.Plugin):
                 self.libraries.append(Library(p))
             except InvalidLibrary:
                 pass
-        processing.Plugin.__init__(self, iface)
+    def initGui(self):
+        pass
+    def unload(self):
+        pass
 
 class InvalidLibrary(RuntimeError):
     def __init__(self, name):

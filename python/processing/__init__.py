@@ -95,18 +95,6 @@ class Framework:
 """ Singleton framework """
 framework = Framework()
 
-class Plugin:
-    """ Processing plugin baseclass.
-    Partially overrides the QGIS plugin interface.
-    Subclass this when implementing your own processing plugin.
-    """
-    def __init__(self, iface):
-        self._iface = iface
-    def initGui(self):
-        pass
-    def unload(self):
-        pass
-
 class Module:
     """ A processing module. """
     def __init__(self, name,
