@@ -83,9 +83,10 @@ class Panel(QDockWidget, Ui_dock):
 class Dialog(QDialog, Ui_runDialog):
     def __init__(self, iface, module):
         QDialog.__init__(self, iface.mainWindow())
+        self.moduleinstance = processing.ModuleInstance(module)
         self.setupUi(self)
         self.setWindowTitle(self.windowTitle() + " - " + module.name())
-        self.moduleinstance = processing.ModuleInstance(module)
+        self.text.setText(module.description())
         self._widgets = set()
         for param, value in self.moduleinstance.parameters().items():
             widget = self.widgetByType(param, value)
