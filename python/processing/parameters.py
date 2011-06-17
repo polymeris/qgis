@@ -67,4 +67,33 @@ class NumericParameter(Parameter):
         Parameter.__init__(self, name, float, description,
 				 defaultValue, role)
 
+class BooleanParameter(Parameter):
+    def __init__(self, name, description = None,
+				 defaultValue = False, role = None):
+        Parameter.__init__(self, name, bool, description,
+				 defaultValue, role)
+
+class ChoiceParameter(Parameter):
+    def __init__(self, name, description = None,
+				 defaultValue = -1, role = None, choices = []):
+        Parameter.__init__(self, name, int, description,
+            defaultValue, role)
+        self._choices = choices
+    def setChoices(self, choices):
+        self._choices = choices
+    def choices(self):
+        return self._choices
+
+class StringParameter(Parameter):
+    def __init__(self, name, description = None,
+				 defaultValue = "", role = None):
+        Parameter.__init__(self, name, int, description,
+				 defaultValue, role)
+            
+class PathParameter(StringParameter):
+    def __init__(self, name, description = None,
+				 defaultValue = ".", role = None):
+        StringParameter.__init__(self, name, description,
+				 defaultValue, role)
+                 
 Validator = QtGui.QValidator

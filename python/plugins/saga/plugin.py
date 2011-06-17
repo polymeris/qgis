@@ -100,15 +100,23 @@ class Module(processing.Module):
     def addParameter(self, sagaParam):
         from processing.parameters import *
         sagaToQGisParam = {
-            saga.PARAMETER_TYPE_Int: NumericParameter,
+            #saga.PARAMETER_TYPE_Node:   ParameterList,
+            saga.PARAMETER_TYPE_Int:    NumericParameter,
             saga.PARAMETER_TYPE_Double: NumericParameter,
-            saga.PARAMETER_TYPE_Degree: NumericParameter
+            saga.PARAMETER_TYPE_Degree: NumericParameter,
+            saga.PARAMETER_TYPE_Bool:   BooleanParameter,
+            saga.PARAMETER_TYPE_String: StringParameter,
+            saga.PARAMETER_TYPE_Text:   StringParameter,
+            saga.PARAMETER_TYPE_FilePath: PathParameter,
+            saga.PARAMETER_TYPE_Choice: ChoiceParameter
         }
         name = sagaParam.Get_Name()
         descr = sagaParam.Get_Description()
         typ = sagaParam.Get_Type()
         try:
             qgisParam = sagaToQGisParam[typ]
+            if typ == saga.PARAMETER_TYPE_Choice:
+                qgisParam.setChoices(["a", "b", "c"])
             self._parameters.add(qgisParam(name, descr))
         except KeyError:
             self._parameters.add(Parameter(name, descr, str))
