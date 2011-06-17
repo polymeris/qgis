@@ -48,8 +48,10 @@ class Parameter:
     def defaultValue(self):
         if self._defaultValue is not None:
             return self._defaultValue
-        else:
+        try:
             return self.type()()
+        except:
+            return ""
     def validator(self):
         return None
 

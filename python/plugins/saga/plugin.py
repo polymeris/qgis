@@ -90,17 +90,16 @@ class Module(processing.Module):
             self.module = lib.Get_Module_Grid(i)
         elif self.interactive:
             self.module = lib.Get_Module_I(i)
+        self._parameters = None
         processing.Module.__init__(self,
             self.module.Get_Name(),
             self.module.Get_Description())
     def addParameter(self, sagaParam):
+        from processing.parameters import *
         sagaToQGisParam = {
-            saga.PARAMETER_TYPE_Int:
-                processing.parameters.NumericParameter,
-            saga.PARAMETER_TYPE_Double:
-                processing.parameters.NumericParameter,
-            saga.PARAMETER_TYPE_Degree:
-                processing.parameters.NumericParameter
+            saga.PARAMETER_TYPE_Int: NumericParameter,
+            saga.PARAMETER_TYPE_Double: NumericParameter,
+            saga.PARAMETER_TYPE_Degree: NumericParameter
         }
         name = sagaParam.Get_Name()
         descr = sagaParam.Get_Description()
@@ -109,10 +108,11 @@ class Module(processing.Module):
             qgisParam = sagaToQGisParam[typ]
             self._parameters.add(qgisParam(name, descr))
         except KeyError:
-            pass
+            self._parameters.add(Parameter(name, descr, str))
     def parameters(self):
         if self._parameters is not None:
             return self._parameters
+        self._parameters = set()
         for i in range(self.module.Get_Parameters_Count()):
             params = self.module.Get_Parameters(i)
             for j in range(params.Get_Count()):

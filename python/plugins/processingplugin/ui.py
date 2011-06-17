@@ -20,7 +20,7 @@
 #   MA 02110-1301, USA.
 
 from PyQt4.QtGui import QDockWidget, QTreeWidgetItem, QDialog
-from PyQt4.QtGui import QSpinBox
+from PyQt4.QtGui import QSpinBox, QLineEdit
 from PyQt4.QtCore import QObject, SIGNAL, Qt
 from ui_dialog import Ui_runDialog
 from ui_panel import Ui_dock
@@ -93,14 +93,20 @@ class Dialog(QDialog, Ui_runDialog):
             if widget is not None:
                 self.form.addRow(param.name(), widget)
     def widgetByType(self, param, value):
+        from processing.parameters import *
         try:
-            return param.widget(param, value)
+            w = param.widget(param, value)
         except AttributeError:
             pass
         try:
             typToWidget = {
-                processing.parameters.NumericParameter: QSpinBox(None)
+                NumericParameter: QSpinBox(None)
                 }
-            return typToWidget[param.__class__]
+            w = typToWidget[param.__class__]
+            try:
+                w.setValue(value)
+            except AttributeError:
+                pass
         except KeyError:
-            return None
+            w = QLineEdit(str(value), None)
+        return w
