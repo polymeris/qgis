@@ -33,52 +33,18 @@ class Panel(QDockWidget, Ui_dock):
         self._dialogs = list()
         self.setupUi(self)
         tags = processing.framework.representativeTags()
-        self.buildModuleList(tags)
+        self.moduleList.setModel(framework)
     	QObject.connect(self.moduleList,
-			SIGNAL("itemActivated(QTreeWidgetItem *, int)"),
+			SIGNAL("activated(QModelIndex)"),
 			self.onItemActivated)
         self.setFloating(False)
         self._iface.addDockWidget(Qt.RightDockWidgetArea, self)
-    ## The TreeWidget's items:
-    class TagItem(QTreeWidgetItem):
-        """ First hierarchical level: order by tags """
-        def __init__(self, parent, tag = "other"):
-            QTreeWidgetItem.__init__(self, parent, [tag])
-    class ModuleItem(QTreeWidgetItem):
-        """ Second hierarchical level: modules by name """
-        def __init__(self, module):
-            QTreeWidgetItem.__init__(self,[module.name()])
-            self._module = module
-        def module(self):
-            return self._module
-    def buildModuleList(self, tags):
-        """ Construct the tree of modules. """
-        topNode = self.moduleList
-        topNode.clear()
-        # a set of modules not yet added to the list
-        pending = set(processing.framework.modules())
-        # add a node for each tag
-        for tag in tags:
-            tagNode = Panel.TagItem(topNode, tag)
-            # and its children
-            #, sorted alphabetically
-            modules = sorted(processing.framework.modulesByTag(tag),
-                key=lambda x: x.name())
-            for mod in modules:
-                modNode = Panel.ModuleItem(mod)
-                tagNode.addChild(modNode)
-                pending.discard(mod)
-        # add non-tagged modules
-        tagNode = Panel.TagItem(topNode)
-        for mod in sorted(pending, key=lambda x: x.name()):
-            modNode = Panel.ModuleItem(mod)
-            tagNode.addChild(modNode)
-    def onItemActivated(self, item, _):
+    def onItemActivated(self, ix):
         """ This slot pops up the relevant dialog. """
-        if type(item) is Panel.ModuleItem:
-            dialog = Dialog(self._iface, item.module())
-            self._dialogs.append(dialog)
-            dialog.show()
+        mod = self.moduleList.data(ix, Module.ModulePointerRole)
+        dialog = Dialog(self._iface, mod)
+        self._dialogs.append(dialog)
+        dialog.show()
 
 class Dialog(QDialog, Ui_runDialog):
     def __init__(self, iface, module):

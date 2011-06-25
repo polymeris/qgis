@@ -21,6 +21,8 @@
 
 import moduleinstance
 from itertools import chain
+from PyQt4.QtCore import QAbstractItemModel, QModelIndex, QVariant, Qt
+
 ModuleInstance = moduleinstance.ModuleInstance
 
 class Tag(str):
@@ -38,9 +40,26 @@ class Tag(str):
         """
         return self.strip().upper() == other.strip().upper()
 
-class Framework:
+class Framework(QStandardItemModel):
     def __init__(self):
         self._moduleProviders = set()
+        # a set of modules not yet added to the list
+        pending = self.modules()
+        # add a node for each tag
+        for tag in self.representativeTags():
+            row = QStandardItem(tag)
+            self.appendRow(row)
+            row.setSelectable(False)
+            modules = self.modulesByTag(tag)
+            for mod in modules:
+                row.appendRow(mod)
+                pending.discard(mod)
+        # add non-tagged modules
+        row = QStandardItem(self.tr("other"))
+        row.setSelectable(False)
+        self.appendRow(row)
+        for mod in pending:
+            row.appendRow(mod)
     def registerModuleProvider(self, moduleprovider):
         """ Register module providers with the framework.
         moduleprovider must implement the modules() method,
@@ -71,9 +90,9 @@ class Framework:
         # relative frequencies.
         tags = map(lambda (k, v): (k, v / len(modules)), tags.items())
         return dict(tags)
-    def usedTags(self):
+    def tags(self):
         """ Tags used."""
-        return set(self.tagFrequency().keys())
+        return self.tagFrequency().keys()
     def representativeTags(self):
         """ Returns list of tags that aren't too frequent or to infrequent
         to be representative.
@@ -91,17 +110,25 @@ class Framework:
         "imagery", "import", "interactive", "paint", "photo",
         "postscript", "projection", "raster", "simulation",
         "statistics", "vector"]])
+    
 
 """ Singleton framework """
 framework = Framework()
 
-class Module:
+class Module(QStandardItem):
+    ModulePointerRole = Qt.UserRole + 101
     """ A processing module. """
     def __init__(self, name,
         description = "", tags = None):
             self._name = name
             self._description = description
             self._tags = tags
+    def data(self, role = Qt.UserRole + 1):
+        if role == Qt.DisplayRole:
+            return self.name()
+        if role == ModulePointerRole:
+            return self
+        return QStandardItem.data(self, role)
     def name(self):
         return self._name
     def description(self):
