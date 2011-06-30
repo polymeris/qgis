@@ -20,7 +20,9 @@
 #   MA 02110-1301, USA.
 
 import moduleinstance
+from traits.api import HasTraits
 from itertools import chain
+
 ModuleInstance = moduleinstance.ModuleInstance
 
 class Tag(str):
@@ -95,7 +97,7 @@ class Framework:
 """ Singleton framework """
 framework = Framework()
 
-class Module:
+class Module(HasTraits):
     """ A processing module. """
     def __init__(self, name,
         description = "", tags = None):
@@ -124,9 +126,3 @@ class Module:
             text = (self.name() + " " + self.description()).lower()
             tags = set([Tag(s.strip(" .-_()/,")) for s in text.split()])
             return Framework.standardTags & tags
-    def parameters(self):
-        """ The modules parameters.
-        Specifiy on construction or override this method to provide your
-        own. Else raises an NotImplementedError.
-        """
-        raise NotImplementedError

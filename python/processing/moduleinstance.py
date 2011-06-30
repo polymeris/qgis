@@ -25,23 +25,8 @@ import PyQt4.QtCore as QtCore
 class ModuleInstance:
     def __init__(self, module):
         self._module = module
-        self._parameters = None
         self.value = self.__getitem__
         self.setValue = self.__setitem__
     def module(self):
         return self._module
-    def parameters(self):
-        if self._parameters is None:
-            self._parameters = dict([(p, p.defaultValue())
-                for p in self.module().parameters()])
-        return self._parameters
-    def __getitem__(self, key):
-        return self._parameters[key]
-    def __setitem__(self, key, value):
-        validator = key.validator()
-        if validator is not None:
-            state, _ = validator.validate(str(value), 0)
-            if state != QtGui.QValidator.Acceptable:
-                return
-        self.emit(PYSIGNAL("valueChanged"), (key, value))
-        self._parameters[key] = value
+

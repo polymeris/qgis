@@ -24,8 +24,6 @@ from PyQt4.QtGui import *
 from qgis.core import *
 
 import os
-import processing
-import processing.parameters
 import saga_api as saga
 
 def getLibraryPaths():
@@ -93,42 +91,9 @@ class Module(processing.Module):
             self.module = lib.Get_Module_Grid(i)
         elif self.interactive:
             self.module = lib.Get_Module_I(i)
-        self._parameters = None
         processing.Module.__init__(self,
             self.module.Get_Name(),
             self.module.Get_Description())
-    def addParameter(self, sagaParam):
-        from processing.parameters import *
-        sagaToQGisParam = {
-            #saga.PARAMETER_TYPE_Node:   ParameterList,
-            saga.PARAMETER_TYPE_Int:    NumericParameter,
-            saga.PARAMETER_TYPE_Double: NumericParameter,
-            saga.PARAMETER_TYPE_Degree: NumericParameter,
-            saga.PARAMETER_TYPE_Bool:   BooleanParameter,
-            saga.PARAMETER_TYPE_String: StringParameter,
-            saga.PARAMETER_TYPE_Text:   StringParameter,
-            saga.PARAMETER_TYPE_FilePath: PathParameter,
-            saga.PARAMETER_TYPE_Choice: ChoiceParameter
-        }
-        name = sagaParam.Get_Name()
-        descr = sagaParam.Get_Description()
-        typ = sagaParam.Get_Type()
-        try:
-            qgisParam = sagaToQGisParam[typ]
-            if typ == saga.PARAMETER_TYPE_Choice:
-                qgisParam.setChoices(["a", "b", "c"])
-            self._parameters.add(qgisParam(name, descr))
-        except KeyError:
-            self._parameters.add(Parameter(name, descr, str))
-    def parameters(self):
-        if self._parameters is not None:
-            return self._parameters
-        self._parameters = set()
-        for i in range(self.module.Get_Parameters_Count()):
-            params = self.module.Get_Parameters(i)
-            for j in range(params.Get_Count()):
-                self.addParameter(params.Get_Parameter(j))
-        return self._parameters
     def tags(self):
         return processing.Module.tags(self) | set([processing.Tag('saga')])
 
