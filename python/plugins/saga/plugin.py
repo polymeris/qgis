@@ -25,6 +25,7 @@ from qgis.core import *
 
 import os
 import saga_api as saga
+import processing
 
 def getLibraryPaths():
     try:

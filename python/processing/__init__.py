@@ -20,10 +20,8 @@
 #   MA 02110-1301, USA.
 
 import moduleinstance
-from traits.api import HasTraits
 from itertools import chain
-
-ModuleInstance = moduleinstance.ModuleInstance
+from traits.api import HasTraits, Instance
 
 class Tag(str):
     """ Case insensitive strings for tag usage. """
@@ -112,6 +110,8 @@ class Module(HasTraits):
         string.
         """
         return self._description
+    def instance(self):
+        return Instance(self)
     def tags(self):
         """ The modules tags.
         By default, this method searches for 'standard tags' in the
