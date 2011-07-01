@@ -21,6 +21,7 @@
 
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+import traits.api as traits
 from qgis.core import *
 
 import os
@@ -95,6 +96,29 @@ class Module(processing.Module):
         processing.Module.__init__(self,
             self.module.Get_Name(),
             self.module.Get_Description())
+        for i in range(self.module.Get_Parameters_Count()):
+            params = self.module.Get_Parameters(i)
+            for j in range(params.Get_Count()):
+                self.addParameter(params.Get_Parameter(j))
+        return self._parameters
+    def addTrait(self, sagaParam):
+        name = sagaParam.Get_Name()
+        descr = sagaParam.Get_Description()
+        typ = sagaParam.Get_Type()
+        sagaToTrait = {
+            saga.PARAMETER_TYPE_Int: traits.Int,
+            saga.PARAMETER_TYPE_Double: traits.Float,
+            saga.PARAMETER_TYPE_Degree: traits.Int,
+            saga.PARAMETER_TYPE_Bool: traits.Bool,
+            saga.PARAMETER_TYPE_String: traits.Unicode,
+            saga.PARAMETER_TYPE_Text: traits.Unicode,
+            saga.PARAMETER_TYPE_FilePath: traits.File,
+        }
+        try:
+            traitTyp = sagaToTrait[typ]
+        except KeyError:
+            traitTyp = traits.Generic
+        self.setattr(name, traitTyp())
     def tags(self):
         return processing.Module.tags(self) | set([processing.Tag('saga')])
 
