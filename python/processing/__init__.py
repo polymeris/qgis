@@ -21,7 +21,7 @@
 
 import moduleinstance
 from itertools import chain
-from traits.api import HasTraits, Instance
+from traits.api import HasTraits, Instance, HTML
 
 class Tag(str):
     """ Case insensitive strings for tag usage. """
@@ -95,7 +95,7 @@ class Framework:
 """ Singleton framework """
 framework = Framework()
 
-class Module(HasTraits):
+class Module:
     """ A processing module. """
     def __init__(self, name,
         description = "", tags = None):
@@ -111,7 +111,7 @@ class Module(HasTraits):
         """
         return self._description
     def instance(self):
-        return Instance(self)
+        return ModuleInstance(self)
     def tags(self):
         """ The modules tags.
         By default, this method searches for 'standard tags' in the
@@ -126,3 +126,8 @@ class Module(HasTraits):
             text = (self.name() + " " + self.description()).lower()
             tags = set([Tag(s.strip(" .-_()/,")) for s in text.split()])
             return Framework.standardTags & tags
+
+class ModuleInstance(HasTraits):
+    def __init__(self, module, **traits):
+        self.description = HTML(value = module.description())
+        HasTraits.__init__(self, **traits)

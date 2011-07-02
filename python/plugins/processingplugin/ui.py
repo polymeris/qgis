@@ -19,8 +19,11 @@
 #   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 #   MA 02110-1301, USA.
 
-from PyQt4.QtGui import QDockWidget
+from PyQt4.QtGui import QDockWidget, QTreeWidgetItem
 from PyQt4.QtCore import QObject, SIGNAL, Qt
+# workaround for "sys.argv not defined" bug
+import sys
+sys.argv = ''
 from traitsui.api import View
 from ui_panel import Ui_dock
 import processing
@@ -75,17 +78,5 @@ class Panel(QDockWidget, Ui_dock):
     def onItemActivated(self, item, _):
         """ This slot pops up the relevant dialog. """
         if type(item) is Panel.ModuleItem:
-            dialog = Dialog(self._iface, item.module())
-            self._dialogs.append(dialog)
-            dialog.show()
-
-class Dialog(View):
-    def __init__(self, iface, module):
-        self._module = module
-        self._moduleinstance = module().instance()
-        View.__init__(self, label = self.module().name())
-    def module(self):
-        return self._module
-    def show(self):
-        self._moduleinstance.configure_traits(view = self)
-        
+            instance = item.module().instance()
+            instance.configure_traits()

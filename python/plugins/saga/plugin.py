@@ -96,11 +96,19 @@ class Module(processing.Module):
         processing.Module.__init__(self,
             self.module.Get_Name(),
             self.module.Get_Description())
+    def instance(self):
+        instance = ModuleInstance(self)
         for i in range(self.module.Get_Parameters_Count()):
             params = self.module.Get_Parameters(i)
             for j in range(params.Get_Count()):
-                self.addParameter(params.Get_Parameter(j))
-        return self._parameters
+                instance.addTrait(params.Get_Parameter(j))
+        return instance
+    def tags(self):
+        return processing.Module.tags(self) | set([processing.Tag('saga')])
+
+class ModuleInstance(processing.ModuleInstance):
+    def __init__(self, module):
+        processing.ModuleInstance.__init__(self, module)
     def addTrait(self, sagaParam):
         name = sagaParam.Get_Name()
         descr = sagaParam.Get_Description()
@@ -118,8 +126,7 @@ class Module(processing.Module):
             traitTyp = sagaToTrait[typ]
         except KeyError:
             traitTyp = traits.Generic
-        self.setattr(name, traitTyp())
-    def tags(self):
-        return processing.Module.tags(self) | set([processing.Tag('saga')])
-
-
+        try:
+            self.add_class_trait(name, traitTyp)
+        except traits.TraitError:
+            pass
