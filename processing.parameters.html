@@ -1,0 +1,908 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module processing.parameters</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="processing.html"><font color="#ffffff">processing</font></a>.parameters</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/dimitri/.qgis/python/processing/parameters.py">/home/dimitri/.qgis/python/processing/parameters.py</a></font></td></tr></table>
+    <p><tt>This&nbsp;module&nbsp;is&nbsp;part&nbsp;of&nbsp;the&nbsp;QGIS&nbsp;Processing&nbsp;Framework.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="PyQt4.QtGui.html">PyQt4.QtGui</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="processing.parameters.html#Parameter">Parameter</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="processing.parameters.html#BooleanParameter">BooleanParameter</a>
+</font></dt><dt><font face="helvetica, arial"><a href="processing.parameters.html#ChoiceParameter">ChoiceParameter</a>
+</font></dt><dt><font face="helvetica, arial"><a href="processing.parameters.html#FeedbackParameter">FeedbackParameter</a>
+</font></dt><dt><font face="helvetica, arial"><a href="processing.parameters.html#LayerParameter">LayerParameter</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="processing.parameters.html#RasterLayerParameter">RasterLayerParameter</a>
+</font></dt><dt><font face="helvetica, arial"><a href="processing.parameters.html#VectorLayerParameter">VectorLayerParameter</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="processing.parameters.html#NumericParameter">NumericParameter</a>
+</font></dt><dt><font face="helvetica, arial"><a href="processing.parameters.html#ParameterList">ParameterList</a>
+</font></dt><dt><font face="helvetica, arial"><a href="processing.parameters.html#RangeParameter">RangeParameter</a>
+</font></dt><dt><font face="helvetica, arial"><a href="processing.parameters.html#StateParameter">StateParameter</a>
+</font></dt><dt><font face="helvetica, arial"><a href="processing.parameters.html#StringParameter">StringParameter</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="processing.parameters.html#PathParameter">PathParameter</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BooleanParameter">class <strong>BooleanParameter</strong></a>(<a href="processing.parameters.html#Parameter">Parameter</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;basic&nbsp;boolean&nbsp;(True/False)&nbsp;parameter.<br>
+Per&nbsp;default&nbsp;displayed&nbsp;as&nbsp;a&nbsp;check&nbsp;box.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="BooleanParameter-__init__"><strong>__init__</strong></a>(self, name, description<font color="#909090">=None</font>, defaultValue<font color="#909090">=False</font>, role<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="processing.parameters.html#Parameter">Parameter</a>:<br>
+<dl><dt><a name="BooleanParameter-defaultValue"><strong>defaultValue</strong></a>(self)</dt><dd><tt>The&nbsp;parameter's&nbsp;default&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="BooleanParameter-description"><strong>description</strong></a>(self)</dt><dd><tt>Longer,&nbsp;optional&nbsp;description&nbsp;of&nbsp;the&nbsp;parameter.<br>
+Currently&nbsp;unused.&nbsp;May&nbsp;appear&nbsp;as&nbsp;a&nbsp;tool-tip&nbsp;in&nbsp;the&nbsp;future.</tt></dd></dl>
+
+<dl><dt><a name="BooleanParameter-isMandatory"><strong>isMandatory</strong></a>(self)</dt><dd><tt>A&nbsp;mandatory&nbsp;parameter&nbsp;must&nbsp;be&nbsp;set&nbsp;when&nbsp;excecuting&nbsp;the<br>
+module&nbsp;instance.<br>
+If&nbsp;not&nbsp;set&nbsp;by&nbsp;the&nbsp;user&nbsp;it&nbsp;may&nbsp;still&nbsp;use&nbsp;its&nbsp;default&nbsp;value,<br>
+if&nbsp;present.<br>
+An&nbsp;optional&nbsp;parameter&nbsp;can&nbsp;be&nbsp;set&nbsp;or&nbsp;not,&nbsp;but&nbsp;will&nbsp;allways<br>
+be&nbsp;set&nbsp;if&nbsp;a&nbsp;default&nbsp;value&nbsp;is&nbsp;provided.</tt></dd></dl>
+
+<dl><dt><a name="BooleanParameter-name"><strong>name</strong></a>(self)</dt><dd><tt>The&nbsp;name&nbsp;displayed&nbsp;in&nbsp;the&nbsp;module&nbsp;instance's&nbsp;run&nbsp;dialog.</tt></dd></dl>
+
+<dl><dt><a name="BooleanParameter-role"><strong>role</strong></a>(self)</dt><dd><tt>See&nbsp;<a href="#Parameter">Parameter</a>.Role&nbsp;and&nbsp;<a href="#Parameter">Parameter</a>&nbsp;classes.</tt></dd></dl>
+
+<dl><dt><a name="BooleanParameter-setDefaultValue"><strong>setDefaultValue</strong></a>(self, value)</dt></dl>
+
+<dl><dt><a name="BooleanParameter-setMandatory"><strong>setMandatory</strong></a>(self, mandatory)</dt></dl>
+
+<dl><dt><a name="BooleanParameter-setRole"><strong>setRole</strong></a>(self, role)</dt></dl>
+
+<dl><dt><a name="BooleanParameter-setValidator"><strong>setValidator</strong></a>(self, validator)</dt></dl>
+
+<dl><dt><a name="BooleanParameter-type"><strong>type</strong></a>(self)</dt><dd><tt>Internal&nbsp;type&nbsp;representation.<br>
+Typically&nbsp;a&nbsp;class&nbsp;or&nbsp;basic&nbsp;python&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="BooleanParameter-userLevel"><strong>userLevel</strong></a>(self)</dt><dd><tt>See&nbsp;<a href="#Parameter">Parameter</a>.UserLevel&nbsp;class.</tt></dd></dl>
+
+<dl><dt><a name="BooleanParameter-validator"><strong>validator</strong></a>(self)</dt><dd><tt>The&nbsp;parameters&nbsp;validator.<br>
+Uses&nbsp;QValidator's&nbsp;interface,&nbsp;but&nbsp;concrete&nbsp;behavior&nbsp;may&nbsp;change<br>
+from&nbsp;one&nbsp;parameter&nbsp;to&nbsp;another.</tt></dd></dl>
+
+<dl><dt><a name="BooleanParameter-widget"><strong>widget</strong></a>(self, value)</dt><dd><tt>If&nbsp;this&nbsp;method&nbsp;is&nbsp;implemented&nbsp;by&nbsp;the&nbsp;backend&nbsp;developer,<br>
+it&nbsp;should&nbsp;return&nbsp;a&nbsp;QWidget&nbsp;instance&nbsp;representing&nbsp;this<br>
+parameter's&nbsp;value&nbsp;(not&nbsp;name&nbsp;or&nbsp;description).<br>
+In&nbsp;the&nbsp;case&nbsp;of&nbsp;built-in&nbsp;parameters,<br>
+no&nbsp;widget&nbsp;is&nbsp;provided,&nbsp;but&nbsp;instead&nbsp;this&nbsp;functionality&nbsp;is<br>
+hard-coded&nbsp;in&nbsp;the&nbsp;Processing&nbsp;Panel,&nbsp;to&nbsp;keep&nbsp;this&nbsp;framework<br>
+GUI-agnostic.</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="processing.parameters.html#Parameter">Parameter</a>:<br>
+<dl><dt><strong>Role</strong> = &lt;class processing.parameters.Role&gt;</dl>
+
+<dl><dt><strong>UserLevel</strong> = &lt;class processing.parameters.UserLevel&gt;</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ChoiceParameter">class <strong>ChoiceParameter</strong></a>(<a href="processing.parameters.html#Parameter">Parameter</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;int-backed&nbsp;choice&nbsp;among&nbsp;enumerated&nbsp;values.<br>
+Per&nbsp;default&nbsp;displayed&nbsp;as&nbsp;a&nbsp;drop&nbsp;box.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ChoiceParameter-__init__"><strong>__init__</strong></a>(self, name, description<font color="#909090">=None</font>, defaultValue<font color="#909090">=-1</font>, role<font color="#909090">=None</font>, choices<font color="#909090">=[]</font>)</dt></dl>
+
+<dl><dt><a name="ChoiceParameter-choices"><strong>choices</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="ChoiceParameter-setChoices"><strong>setChoices</strong></a>(self, choices)</dt></dl>
+
+<hr>
+Methods inherited from <a href="processing.parameters.html#Parameter">Parameter</a>:<br>
+<dl><dt><a name="ChoiceParameter-defaultValue"><strong>defaultValue</strong></a>(self)</dt><dd><tt>The&nbsp;parameter's&nbsp;default&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="ChoiceParameter-description"><strong>description</strong></a>(self)</dt><dd><tt>Longer,&nbsp;optional&nbsp;description&nbsp;of&nbsp;the&nbsp;parameter.<br>
+Currently&nbsp;unused.&nbsp;May&nbsp;appear&nbsp;as&nbsp;a&nbsp;tool-tip&nbsp;in&nbsp;the&nbsp;future.</tt></dd></dl>
+
+<dl><dt><a name="ChoiceParameter-isMandatory"><strong>isMandatory</strong></a>(self)</dt><dd><tt>A&nbsp;mandatory&nbsp;parameter&nbsp;must&nbsp;be&nbsp;set&nbsp;when&nbsp;excecuting&nbsp;the<br>
+module&nbsp;instance.<br>
+If&nbsp;not&nbsp;set&nbsp;by&nbsp;the&nbsp;user&nbsp;it&nbsp;may&nbsp;still&nbsp;use&nbsp;its&nbsp;default&nbsp;value,<br>
+if&nbsp;present.<br>
+An&nbsp;optional&nbsp;parameter&nbsp;can&nbsp;be&nbsp;set&nbsp;or&nbsp;not,&nbsp;but&nbsp;will&nbsp;allways<br>
+be&nbsp;set&nbsp;if&nbsp;a&nbsp;default&nbsp;value&nbsp;is&nbsp;provided.</tt></dd></dl>
+
+<dl><dt><a name="ChoiceParameter-name"><strong>name</strong></a>(self)</dt><dd><tt>The&nbsp;name&nbsp;displayed&nbsp;in&nbsp;the&nbsp;module&nbsp;instance's&nbsp;run&nbsp;dialog.</tt></dd></dl>
+
+<dl><dt><a name="ChoiceParameter-role"><strong>role</strong></a>(self)</dt><dd><tt>See&nbsp;<a href="#Parameter">Parameter</a>.Role&nbsp;and&nbsp;<a href="#Parameter">Parameter</a>&nbsp;classes.</tt></dd></dl>
+
+<dl><dt><a name="ChoiceParameter-setDefaultValue"><strong>setDefaultValue</strong></a>(self, value)</dt></dl>
+
+<dl><dt><a name="ChoiceParameter-setMandatory"><strong>setMandatory</strong></a>(self, mandatory)</dt></dl>
+
+<dl><dt><a name="ChoiceParameter-setRole"><strong>setRole</strong></a>(self, role)</dt></dl>
+
+<dl><dt><a name="ChoiceParameter-setValidator"><strong>setValidator</strong></a>(self, validator)</dt></dl>
+
+<dl><dt><a name="ChoiceParameter-type"><strong>type</strong></a>(self)</dt><dd><tt>Internal&nbsp;type&nbsp;representation.<br>
+Typically&nbsp;a&nbsp;class&nbsp;or&nbsp;basic&nbsp;python&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="ChoiceParameter-userLevel"><strong>userLevel</strong></a>(self)</dt><dd><tt>See&nbsp;<a href="#Parameter">Parameter</a>.UserLevel&nbsp;class.</tt></dd></dl>
+
+<dl><dt><a name="ChoiceParameter-validator"><strong>validator</strong></a>(self)</dt><dd><tt>The&nbsp;parameters&nbsp;validator.<br>
+Uses&nbsp;QValidator's&nbsp;interface,&nbsp;but&nbsp;concrete&nbsp;behavior&nbsp;may&nbsp;change<br>
+from&nbsp;one&nbsp;parameter&nbsp;to&nbsp;another.</tt></dd></dl>
+
+<dl><dt><a name="ChoiceParameter-widget"><strong>widget</strong></a>(self, value)</dt><dd><tt>If&nbsp;this&nbsp;method&nbsp;is&nbsp;implemented&nbsp;by&nbsp;the&nbsp;backend&nbsp;developer,<br>
+it&nbsp;should&nbsp;return&nbsp;a&nbsp;QWidget&nbsp;instance&nbsp;representing&nbsp;this<br>
+parameter's&nbsp;value&nbsp;(not&nbsp;name&nbsp;or&nbsp;description).<br>
+In&nbsp;the&nbsp;case&nbsp;of&nbsp;built-in&nbsp;parameters,<br>
+no&nbsp;widget&nbsp;is&nbsp;provided,&nbsp;but&nbsp;instead&nbsp;this&nbsp;functionality&nbsp;is<br>
+hard-coded&nbsp;in&nbsp;the&nbsp;Processing&nbsp;Panel,&nbsp;to&nbsp;keep&nbsp;this&nbsp;framework<br>
+GUI-agnostic.</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="processing.parameters.html#Parameter">Parameter</a>:<br>
+<dl><dt><strong>Role</strong> = &lt;class processing.parameters.Role&gt;</dl>
+
+<dl><dt><strong>UserLevel</strong> = &lt;class processing.parameters.UserLevel&gt;</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="FeedbackParameter">class <strong>FeedbackParameter</strong></a>(<a href="processing.parameters.html#Parameter">Parameter</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>This&nbsp;parameter&nbsp;passes&nbsp;feedback&nbsp;to&nbsp;the&nbsp;user:&nbsp;be&nbsp;it&nbsp;messages,<br>
+status&nbsp;indicators,&nbsp;errors,&nbsp;etc.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="FeedbackParameter-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="processing.parameters.html#Parameter">Parameter</a>:<br>
+<dl><dt><a name="FeedbackParameter-defaultValue"><strong>defaultValue</strong></a>(self)</dt><dd><tt>The&nbsp;parameter's&nbsp;default&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="FeedbackParameter-description"><strong>description</strong></a>(self)</dt><dd><tt>Longer,&nbsp;optional&nbsp;description&nbsp;of&nbsp;the&nbsp;parameter.<br>
+Currently&nbsp;unused.&nbsp;May&nbsp;appear&nbsp;as&nbsp;a&nbsp;tool-tip&nbsp;in&nbsp;the&nbsp;future.</tt></dd></dl>
+
+<dl><dt><a name="FeedbackParameter-isMandatory"><strong>isMandatory</strong></a>(self)</dt><dd><tt>A&nbsp;mandatory&nbsp;parameter&nbsp;must&nbsp;be&nbsp;set&nbsp;when&nbsp;excecuting&nbsp;the<br>
+module&nbsp;instance.<br>
+If&nbsp;not&nbsp;set&nbsp;by&nbsp;the&nbsp;user&nbsp;it&nbsp;may&nbsp;still&nbsp;use&nbsp;its&nbsp;default&nbsp;value,<br>
+if&nbsp;present.<br>
+An&nbsp;optional&nbsp;parameter&nbsp;can&nbsp;be&nbsp;set&nbsp;or&nbsp;not,&nbsp;but&nbsp;will&nbsp;allways<br>
+be&nbsp;set&nbsp;if&nbsp;a&nbsp;default&nbsp;value&nbsp;is&nbsp;provided.</tt></dd></dl>
+
+<dl><dt><a name="FeedbackParameter-name"><strong>name</strong></a>(self)</dt><dd><tt>The&nbsp;name&nbsp;displayed&nbsp;in&nbsp;the&nbsp;module&nbsp;instance's&nbsp;run&nbsp;dialog.</tt></dd></dl>
+
+<dl><dt><a name="FeedbackParameter-role"><strong>role</strong></a>(self)</dt><dd><tt>See&nbsp;<a href="#Parameter">Parameter</a>.Role&nbsp;and&nbsp;<a href="#Parameter">Parameter</a>&nbsp;classes.</tt></dd></dl>
+
+<dl><dt><a name="FeedbackParameter-setDefaultValue"><strong>setDefaultValue</strong></a>(self, value)</dt></dl>
+
+<dl><dt><a name="FeedbackParameter-setMandatory"><strong>setMandatory</strong></a>(self, mandatory)</dt></dl>
+
+<dl><dt><a name="FeedbackParameter-setRole"><strong>setRole</strong></a>(self, role)</dt></dl>
+
+<dl><dt><a name="FeedbackParameter-setValidator"><strong>setValidator</strong></a>(self, validator)</dt></dl>
+
+<dl><dt><a name="FeedbackParameter-type"><strong>type</strong></a>(self)</dt><dd><tt>Internal&nbsp;type&nbsp;representation.<br>
+Typically&nbsp;a&nbsp;class&nbsp;or&nbsp;basic&nbsp;python&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="FeedbackParameter-userLevel"><strong>userLevel</strong></a>(self)</dt><dd><tt>See&nbsp;<a href="#Parameter">Parameter</a>.UserLevel&nbsp;class.</tt></dd></dl>
+
+<dl><dt><a name="FeedbackParameter-validator"><strong>validator</strong></a>(self)</dt><dd><tt>The&nbsp;parameters&nbsp;validator.<br>
+Uses&nbsp;QValidator's&nbsp;interface,&nbsp;but&nbsp;concrete&nbsp;behavior&nbsp;may&nbsp;change<br>
+from&nbsp;one&nbsp;parameter&nbsp;to&nbsp;another.</tt></dd></dl>
+
+<dl><dt><a name="FeedbackParameter-widget"><strong>widget</strong></a>(self, value)</dt><dd><tt>If&nbsp;this&nbsp;method&nbsp;is&nbsp;implemented&nbsp;by&nbsp;the&nbsp;backend&nbsp;developer,<br>
+it&nbsp;should&nbsp;return&nbsp;a&nbsp;QWidget&nbsp;instance&nbsp;representing&nbsp;this<br>
+parameter's&nbsp;value&nbsp;(not&nbsp;name&nbsp;or&nbsp;description).<br>
+In&nbsp;the&nbsp;case&nbsp;of&nbsp;built-in&nbsp;parameters,<br>
+no&nbsp;widget&nbsp;is&nbsp;provided,&nbsp;but&nbsp;instead&nbsp;this&nbsp;functionality&nbsp;is<br>
+hard-coded&nbsp;in&nbsp;the&nbsp;Processing&nbsp;Panel,&nbsp;to&nbsp;keep&nbsp;this&nbsp;framework<br>
+GUI-agnostic.</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="processing.parameters.html#Parameter">Parameter</a>:<br>
+<dl><dt><strong>Role</strong> = &lt;class processing.parameters.Role&gt;</dl>
+
+<dl><dt><strong>UserLevel</strong> = &lt;class processing.parameters.UserLevel&gt;</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="LayerParameter">class <strong>LayerParameter</strong></a>(<a href="processing.parameters.html#Parameter">Parameter</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Base&nbsp;to&nbsp;the&nbsp;different&nbsp;types&nbsp;of&nbsp;layers&nbsp;available&nbsp;thorugh&nbsp;QGIS.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="LayerParameter-__init__"><strong>__init__</strong></a>(self, name, pType<font color="#909090">=&lt;class 'qgis.core.QgsMapLayer'&gt;</font>, description<font color="#909090">=None</font>, defaultValue<font color="#909090">=[]</font>, role<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="processing.parameters.html#Parameter">Parameter</a>:<br>
+<dl><dt><a name="LayerParameter-defaultValue"><strong>defaultValue</strong></a>(self)</dt><dd><tt>The&nbsp;parameter's&nbsp;default&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="LayerParameter-description"><strong>description</strong></a>(self)</dt><dd><tt>Longer,&nbsp;optional&nbsp;description&nbsp;of&nbsp;the&nbsp;parameter.<br>
+Currently&nbsp;unused.&nbsp;May&nbsp;appear&nbsp;as&nbsp;a&nbsp;tool-tip&nbsp;in&nbsp;the&nbsp;future.</tt></dd></dl>
+
+<dl><dt><a name="LayerParameter-isMandatory"><strong>isMandatory</strong></a>(self)</dt><dd><tt>A&nbsp;mandatory&nbsp;parameter&nbsp;must&nbsp;be&nbsp;set&nbsp;when&nbsp;excecuting&nbsp;the<br>
+module&nbsp;instance.<br>
+If&nbsp;not&nbsp;set&nbsp;by&nbsp;the&nbsp;user&nbsp;it&nbsp;may&nbsp;still&nbsp;use&nbsp;its&nbsp;default&nbsp;value,<br>
+if&nbsp;present.<br>
+An&nbsp;optional&nbsp;parameter&nbsp;can&nbsp;be&nbsp;set&nbsp;or&nbsp;not,&nbsp;but&nbsp;will&nbsp;allways<br>
+be&nbsp;set&nbsp;if&nbsp;a&nbsp;default&nbsp;value&nbsp;is&nbsp;provided.</tt></dd></dl>
+
+<dl><dt><a name="LayerParameter-name"><strong>name</strong></a>(self)</dt><dd><tt>The&nbsp;name&nbsp;displayed&nbsp;in&nbsp;the&nbsp;module&nbsp;instance's&nbsp;run&nbsp;dialog.</tt></dd></dl>
+
+<dl><dt><a name="LayerParameter-role"><strong>role</strong></a>(self)</dt><dd><tt>See&nbsp;<a href="#Parameter">Parameter</a>.Role&nbsp;and&nbsp;<a href="#Parameter">Parameter</a>&nbsp;classes.</tt></dd></dl>
+
+<dl><dt><a name="LayerParameter-setDefaultValue"><strong>setDefaultValue</strong></a>(self, value)</dt></dl>
+
+<dl><dt><a name="LayerParameter-setMandatory"><strong>setMandatory</strong></a>(self, mandatory)</dt></dl>
+
+<dl><dt><a name="LayerParameter-setRole"><strong>setRole</strong></a>(self, role)</dt></dl>
+
+<dl><dt><a name="LayerParameter-setValidator"><strong>setValidator</strong></a>(self, validator)</dt></dl>
+
+<dl><dt><a name="LayerParameter-type"><strong>type</strong></a>(self)</dt><dd><tt>Internal&nbsp;type&nbsp;representation.<br>
+Typically&nbsp;a&nbsp;class&nbsp;or&nbsp;basic&nbsp;python&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="LayerParameter-userLevel"><strong>userLevel</strong></a>(self)</dt><dd><tt>See&nbsp;<a href="#Parameter">Parameter</a>.UserLevel&nbsp;class.</tt></dd></dl>
+
+<dl><dt><a name="LayerParameter-validator"><strong>validator</strong></a>(self)</dt><dd><tt>The&nbsp;parameters&nbsp;validator.<br>
+Uses&nbsp;QValidator's&nbsp;interface,&nbsp;but&nbsp;concrete&nbsp;behavior&nbsp;may&nbsp;change<br>
+from&nbsp;one&nbsp;parameter&nbsp;to&nbsp;another.</tt></dd></dl>
+
+<dl><dt><a name="LayerParameter-widget"><strong>widget</strong></a>(self, value)</dt><dd><tt>If&nbsp;this&nbsp;method&nbsp;is&nbsp;implemented&nbsp;by&nbsp;the&nbsp;backend&nbsp;developer,<br>
+it&nbsp;should&nbsp;return&nbsp;a&nbsp;QWidget&nbsp;instance&nbsp;representing&nbsp;this<br>
+parameter's&nbsp;value&nbsp;(not&nbsp;name&nbsp;or&nbsp;description).<br>
+In&nbsp;the&nbsp;case&nbsp;of&nbsp;built-in&nbsp;parameters,<br>
+no&nbsp;widget&nbsp;is&nbsp;provided,&nbsp;but&nbsp;instead&nbsp;this&nbsp;functionality&nbsp;is<br>
+hard-coded&nbsp;in&nbsp;the&nbsp;Processing&nbsp;Panel,&nbsp;to&nbsp;keep&nbsp;this&nbsp;framework<br>
+GUI-agnostic.</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="processing.parameters.html#Parameter">Parameter</a>:<br>
+<dl><dt><strong>Role</strong> = &lt;class processing.parameters.Role&gt;</dl>
+
+<dl><dt><strong>UserLevel</strong> = &lt;class processing.parameters.UserLevel&gt;</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="NumericParameter">class <strong>NumericParameter</strong></a>(<a href="processing.parameters.html#Parameter">Parameter</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Parameter">Parameter</a>&nbsp;backed&nbsp;by&nbsp;a&nbsp;python&nbsp;float.&nbsp;Represents&nbsp;all&nbsp;kinds<br>
+of&nbsp;numeric&nbsp;values&nbsp;the&nbsp;module&nbsp;instance&nbsp;may&nbsp;input&nbsp;or&nbsp;output.<br>
+Per&nbsp;default,&nbsp;it&nbsp;is&nbsp;displayed&nbsp;as&nbsp;a&nbsp;spinbox.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="NumericParameter-__init__"><strong>__init__</strong></a>(self, name, description<font color="#909090">=None</font>, defaultValue<font color="#909090">=0.0</font>, role<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="processing.parameters.html#Parameter">Parameter</a>:<br>
+<dl><dt><a name="NumericParameter-defaultValue"><strong>defaultValue</strong></a>(self)</dt><dd><tt>The&nbsp;parameter's&nbsp;default&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="NumericParameter-description"><strong>description</strong></a>(self)</dt><dd><tt>Longer,&nbsp;optional&nbsp;description&nbsp;of&nbsp;the&nbsp;parameter.<br>
+Currently&nbsp;unused.&nbsp;May&nbsp;appear&nbsp;as&nbsp;a&nbsp;tool-tip&nbsp;in&nbsp;the&nbsp;future.</tt></dd></dl>
+
+<dl><dt><a name="NumericParameter-isMandatory"><strong>isMandatory</strong></a>(self)</dt><dd><tt>A&nbsp;mandatory&nbsp;parameter&nbsp;must&nbsp;be&nbsp;set&nbsp;when&nbsp;excecuting&nbsp;the<br>
+module&nbsp;instance.<br>
+If&nbsp;not&nbsp;set&nbsp;by&nbsp;the&nbsp;user&nbsp;it&nbsp;may&nbsp;still&nbsp;use&nbsp;its&nbsp;default&nbsp;value,<br>
+if&nbsp;present.<br>
+An&nbsp;optional&nbsp;parameter&nbsp;can&nbsp;be&nbsp;set&nbsp;or&nbsp;not,&nbsp;but&nbsp;will&nbsp;allways<br>
+be&nbsp;set&nbsp;if&nbsp;a&nbsp;default&nbsp;value&nbsp;is&nbsp;provided.</tt></dd></dl>
+
+<dl><dt><a name="NumericParameter-name"><strong>name</strong></a>(self)</dt><dd><tt>The&nbsp;name&nbsp;displayed&nbsp;in&nbsp;the&nbsp;module&nbsp;instance's&nbsp;run&nbsp;dialog.</tt></dd></dl>
+
+<dl><dt><a name="NumericParameter-role"><strong>role</strong></a>(self)</dt><dd><tt>See&nbsp;<a href="#Parameter">Parameter</a>.Role&nbsp;and&nbsp;<a href="#Parameter">Parameter</a>&nbsp;classes.</tt></dd></dl>
+
+<dl><dt><a name="NumericParameter-setDefaultValue"><strong>setDefaultValue</strong></a>(self, value)</dt></dl>
+
+<dl><dt><a name="NumericParameter-setMandatory"><strong>setMandatory</strong></a>(self, mandatory)</dt></dl>
+
+<dl><dt><a name="NumericParameter-setRole"><strong>setRole</strong></a>(self, role)</dt></dl>
+
+<dl><dt><a name="NumericParameter-setValidator"><strong>setValidator</strong></a>(self, validator)</dt></dl>
+
+<dl><dt><a name="NumericParameter-type"><strong>type</strong></a>(self)</dt><dd><tt>Internal&nbsp;type&nbsp;representation.<br>
+Typically&nbsp;a&nbsp;class&nbsp;or&nbsp;basic&nbsp;python&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="NumericParameter-userLevel"><strong>userLevel</strong></a>(self)</dt><dd><tt>See&nbsp;<a href="#Parameter">Parameter</a>.UserLevel&nbsp;class.</tt></dd></dl>
+
+<dl><dt><a name="NumericParameter-validator"><strong>validator</strong></a>(self)</dt><dd><tt>The&nbsp;parameters&nbsp;validator.<br>
+Uses&nbsp;QValidator's&nbsp;interface,&nbsp;but&nbsp;concrete&nbsp;behavior&nbsp;may&nbsp;change<br>
+from&nbsp;one&nbsp;parameter&nbsp;to&nbsp;another.</tt></dd></dl>
+
+<dl><dt><a name="NumericParameter-widget"><strong>widget</strong></a>(self, value)</dt><dd><tt>If&nbsp;this&nbsp;method&nbsp;is&nbsp;implemented&nbsp;by&nbsp;the&nbsp;backend&nbsp;developer,<br>
+it&nbsp;should&nbsp;return&nbsp;a&nbsp;QWidget&nbsp;instance&nbsp;representing&nbsp;this<br>
+parameter's&nbsp;value&nbsp;(not&nbsp;name&nbsp;or&nbsp;description).<br>
+In&nbsp;the&nbsp;case&nbsp;of&nbsp;built-in&nbsp;parameters,<br>
+no&nbsp;widget&nbsp;is&nbsp;provided,&nbsp;but&nbsp;instead&nbsp;this&nbsp;functionality&nbsp;is<br>
+hard-coded&nbsp;in&nbsp;the&nbsp;Processing&nbsp;Panel,&nbsp;to&nbsp;keep&nbsp;this&nbsp;framework<br>
+GUI-agnostic.</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="processing.parameters.html#Parameter">Parameter</a>:<br>
+<dl><dt><strong>Role</strong> = &lt;class processing.parameters.Role&gt;</dl>
+
+<dl><dt><strong>UserLevel</strong> = &lt;class processing.parameters.UserLevel&gt;</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Parameter">class <strong>Parameter</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Base&nbsp;class&nbsp;for&nbsp;processing&nbsp;parameters.<br>
+Parameters&nbsp;may&nbsp;represent&nbsp;input&nbsp;or&nbsp;output&nbsp;values,&nbsp;including&nbsp;special<br>
+cases&nbsp;control&nbsp;and&nbsp;feedback.&nbsp;The&nbsp;former&nbsp;is&nbsp;an&nbsp;interface&nbsp;to&nbsp;the<br>
+module&nbsp;instance's&nbsp;internal&nbsp;state&nbsp;(stopped,&nbsp;setup,&nbsp;running,<br>
+interaction,&nbsp;paused),&nbsp;while&nbsp;the&nbsp;latter&nbsp;is&nbsp;the&nbsp;means&nbsp;to&nbsp;provide<br>
+feedback&nbsp;(messages,&nbsp;status&nbsp;indicators,&nbsp;errors)&nbsp;to&nbsp;the&nbsp;user&nbsp;or<br>
+controlling&nbsp;code.<br>
+Certain&nbsp;basic&nbsp;parameter&nbsp;types&nbsp;are&nbsp;implemented&nbsp;in&nbsp;the&nbsp;framework,<br>
+but,&nbsp;of&nbsp;course,&nbsp;backend&nbsp;developers&nbsp;can&nbsp;implement&nbsp;their&nbsp;own&nbsp;by<br>
+expanding&nbsp;this&nbsp;module's&nbsp;classes.<br>
+&nbsp;<br>
+For&nbsp;description&nbsp;of&nbsp;the&nbsp;argument's&nbsp;see&nbsp;their&nbsp;getter&nbsp;methods:<br>
+<a href="#Parameter-name">name</a>(),&nbsp;<a href="#Parameter-description">description</a>(),&nbsp;<a href="#Parameter-type">type</a>(),&nbsp;<a href="#Parameter-role">role</a>(),&nbsp;<a href="#Parameter-userLevel">userLevel</a>(),&nbsp;<a href="#Parameter-isMandatory">isMandatory</a>(),<br>
+<a href="#Parameter-defaultValue">defaultValue</a>(),&nbsp;<a href="#Parameter-validator">validator</a>(),&nbsp;<a href="#Parameter-widget">widget</a>()<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Parameter-__init__"><strong>__init__</strong></a>(self, name, pType, description<font color="#909090">=None</font>, defaultValue<font color="#909090">=None</font>, role<font color="#909090">=None</font>, mandatory<font color="#909090">=True</font>, validator<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="Parameter-defaultValue"><strong>defaultValue</strong></a>(self)</dt><dd><tt>The&nbsp;parameter's&nbsp;default&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="Parameter-description"><strong>description</strong></a>(self)</dt><dd><tt>Longer,&nbsp;optional&nbsp;description&nbsp;of&nbsp;the&nbsp;parameter.<br>
+Currently&nbsp;unused.&nbsp;May&nbsp;appear&nbsp;as&nbsp;a&nbsp;tool-tip&nbsp;in&nbsp;the&nbsp;future.</tt></dd></dl>
+
+<dl><dt><a name="Parameter-isMandatory"><strong>isMandatory</strong></a>(self)</dt><dd><tt>A&nbsp;mandatory&nbsp;parameter&nbsp;must&nbsp;be&nbsp;set&nbsp;when&nbsp;excecuting&nbsp;the<br>
+module&nbsp;instance.<br>
+If&nbsp;not&nbsp;set&nbsp;by&nbsp;the&nbsp;user&nbsp;it&nbsp;may&nbsp;still&nbsp;use&nbsp;its&nbsp;default&nbsp;value,<br>
+if&nbsp;present.<br>
+An&nbsp;optional&nbsp;parameter&nbsp;can&nbsp;be&nbsp;set&nbsp;or&nbsp;not,&nbsp;but&nbsp;will&nbsp;allways<br>
+be&nbsp;set&nbsp;if&nbsp;a&nbsp;default&nbsp;value&nbsp;is&nbsp;provided.</tt></dd></dl>
+
+<dl><dt><a name="Parameter-name"><strong>name</strong></a>(self)</dt><dd><tt>The&nbsp;name&nbsp;displayed&nbsp;in&nbsp;the&nbsp;module&nbsp;instance's&nbsp;run&nbsp;dialog.</tt></dd></dl>
+
+<dl><dt><a name="Parameter-role"><strong>role</strong></a>(self)</dt><dd><tt>See&nbsp;<a href="#Parameter">Parameter</a>.Role&nbsp;and&nbsp;<a href="#Parameter">Parameter</a>&nbsp;classes.</tt></dd></dl>
+
+<dl><dt><a name="Parameter-setDefaultValue"><strong>setDefaultValue</strong></a>(self, value)</dt></dl>
+
+<dl><dt><a name="Parameter-setMandatory"><strong>setMandatory</strong></a>(self, mandatory)</dt></dl>
+
+<dl><dt><a name="Parameter-setRole"><strong>setRole</strong></a>(self, role)</dt></dl>
+
+<dl><dt><a name="Parameter-setValidator"><strong>setValidator</strong></a>(self, validator)</dt></dl>
+
+<dl><dt><a name="Parameter-type"><strong>type</strong></a>(self)</dt><dd><tt>Internal&nbsp;type&nbsp;representation.<br>
+Typically&nbsp;a&nbsp;class&nbsp;or&nbsp;basic&nbsp;python&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="Parameter-userLevel"><strong>userLevel</strong></a>(self)</dt><dd><tt>See&nbsp;<a href="#Parameter">Parameter</a>.UserLevel&nbsp;class.</tt></dd></dl>
+
+<dl><dt><a name="Parameter-validator"><strong>validator</strong></a>(self)</dt><dd><tt>The&nbsp;parameters&nbsp;validator.<br>
+Uses&nbsp;QValidator's&nbsp;interface,&nbsp;but&nbsp;concrete&nbsp;behavior&nbsp;may&nbsp;change<br>
+from&nbsp;one&nbsp;parameter&nbsp;to&nbsp;another.</tt></dd></dl>
+
+<dl><dt><a name="Parameter-widget"><strong>widget</strong></a>(self, value)</dt><dd><tt>If&nbsp;this&nbsp;method&nbsp;is&nbsp;implemented&nbsp;by&nbsp;the&nbsp;backend&nbsp;developer,<br>
+it&nbsp;should&nbsp;return&nbsp;a&nbsp;QWidget&nbsp;instance&nbsp;representing&nbsp;this<br>
+parameter's&nbsp;value&nbsp;(not&nbsp;name&nbsp;or&nbsp;description).<br>
+In&nbsp;the&nbsp;case&nbsp;of&nbsp;built-in&nbsp;parameters,<br>
+no&nbsp;widget&nbsp;is&nbsp;provided,&nbsp;but&nbsp;instead&nbsp;this&nbsp;functionality&nbsp;is<br>
+hard-coded&nbsp;in&nbsp;the&nbsp;Processing&nbsp;Panel,&nbsp;to&nbsp;keep&nbsp;this&nbsp;framework<br>
+GUI-agnostic.</tt></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>Role</strong> = &lt;class processing.parameters.Role&gt;</dl>
+
+<dl><dt><strong>UserLevel</strong> = &lt;class processing.parameters.UserLevel&gt;</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ParameterList">class <strong>ParameterList</strong></a>(<a href="processing.parameters.html#Parameter">Parameter</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>List&nbsp;of&nbsp;parameters&nbsp;with&nbsp;fixed&nbsp;type.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ParameterList-__init__"><strong>__init__</strong></a>(self, name, itemType, description<font color="#909090">=None</font>, defaultValue<font color="#909090">=[]</font>, role<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="processing.parameters.html#Parameter">Parameter</a>:<br>
+<dl><dt><a name="ParameterList-defaultValue"><strong>defaultValue</strong></a>(self)</dt><dd><tt>The&nbsp;parameter's&nbsp;default&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="ParameterList-description"><strong>description</strong></a>(self)</dt><dd><tt>Longer,&nbsp;optional&nbsp;description&nbsp;of&nbsp;the&nbsp;parameter.<br>
+Currently&nbsp;unused.&nbsp;May&nbsp;appear&nbsp;as&nbsp;a&nbsp;tool-tip&nbsp;in&nbsp;the&nbsp;future.</tt></dd></dl>
+
+<dl><dt><a name="ParameterList-isMandatory"><strong>isMandatory</strong></a>(self)</dt><dd><tt>A&nbsp;mandatory&nbsp;parameter&nbsp;must&nbsp;be&nbsp;set&nbsp;when&nbsp;excecuting&nbsp;the<br>
+module&nbsp;instance.<br>
+If&nbsp;not&nbsp;set&nbsp;by&nbsp;the&nbsp;user&nbsp;it&nbsp;may&nbsp;still&nbsp;use&nbsp;its&nbsp;default&nbsp;value,<br>
+if&nbsp;present.<br>
+An&nbsp;optional&nbsp;parameter&nbsp;can&nbsp;be&nbsp;set&nbsp;or&nbsp;not,&nbsp;but&nbsp;will&nbsp;allways<br>
+be&nbsp;set&nbsp;if&nbsp;a&nbsp;default&nbsp;value&nbsp;is&nbsp;provided.</tt></dd></dl>
+
+<dl><dt><a name="ParameterList-name"><strong>name</strong></a>(self)</dt><dd><tt>The&nbsp;name&nbsp;displayed&nbsp;in&nbsp;the&nbsp;module&nbsp;instance's&nbsp;run&nbsp;dialog.</tt></dd></dl>
+
+<dl><dt><a name="ParameterList-role"><strong>role</strong></a>(self)</dt><dd><tt>See&nbsp;<a href="#Parameter">Parameter</a>.Role&nbsp;and&nbsp;<a href="#Parameter">Parameter</a>&nbsp;classes.</tt></dd></dl>
+
+<dl><dt><a name="ParameterList-setDefaultValue"><strong>setDefaultValue</strong></a>(self, value)</dt></dl>
+
+<dl><dt><a name="ParameterList-setMandatory"><strong>setMandatory</strong></a>(self, mandatory)</dt></dl>
+
+<dl><dt><a name="ParameterList-setRole"><strong>setRole</strong></a>(self, role)</dt></dl>
+
+<dl><dt><a name="ParameterList-setValidator"><strong>setValidator</strong></a>(self, validator)</dt></dl>
+
+<dl><dt><a name="ParameterList-type"><strong>type</strong></a>(self)</dt><dd><tt>Internal&nbsp;type&nbsp;representation.<br>
+Typically&nbsp;a&nbsp;class&nbsp;or&nbsp;basic&nbsp;python&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="ParameterList-userLevel"><strong>userLevel</strong></a>(self)</dt><dd><tt>See&nbsp;<a href="#Parameter">Parameter</a>.UserLevel&nbsp;class.</tt></dd></dl>
+
+<dl><dt><a name="ParameterList-validator"><strong>validator</strong></a>(self)</dt><dd><tt>The&nbsp;parameters&nbsp;validator.<br>
+Uses&nbsp;QValidator's&nbsp;interface,&nbsp;but&nbsp;concrete&nbsp;behavior&nbsp;may&nbsp;change<br>
+from&nbsp;one&nbsp;parameter&nbsp;to&nbsp;another.</tt></dd></dl>
+
+<dl><dt><a name="ParameterList-widget"><strong>widget</strong></a>(self, value)</dt><dd><tt>If&nbsp;this&nbsp;method&nbsp;is&nbsp;implemented&nbsp;by&nbsp;the&nbsp;backend&nbsp;developer,<br>
+it&nbsp;should&nbsp;return&nbsp;a&nbsp;QWidget&nbsp;instance&nbsp;representing&nbsp;this<br>
+parameter's&nbsp;value&nbsp;(not&nbsp;name&nbsp;or&nbsp;description).<br>
+In&nbsp;the&nbsp;case&nbsp;of&nbsp;built-in&nbsp;parameters,<br>
+no&nbsp;widget&nbsp;is&nbsp;provided,&nbsp;but&nbsp;instead&nbsp;this&nbsp;functionality&nbsp;is<br>
+hard-coded&nbsp;in&nbsp;the&nbsp;Processing&nbsp;Panel,&nbsp;to&nbsp;keep&nbsp;this&nbsp;framework<br>
+GUI-agnostic.</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="processing.parameters.html#Parameter">Parameter</a>:<br>
+<dl><dt><strong>Role</strong> = &lt;class processing.parameters.Role&gt;</dl>
+
+<dl><dt><strong>UserLevel</strong> = &lt;class processing.parameters.UserLevel&gt;</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="PathParameter">class <strong>PathParameter</strong></a>(<a href="processing.parameters.html#StringParameter">StringParameter</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;path&nbsp;to&nbsp;a&nbsp;file&nbsp;or&nbsp;directory.<br>
+A&nbsp;widget&nbsp;containing&nbsp;a&nbsp;line&nbsp;edit&nbsp;and&nbsp;a&nbsp;'Browse...'&nbsp;button&nbsp;that<br>
+brings&nbsp;up&nbsp;a&nbsp;file&nbsp;selection&nbsp;dialog&nbsp;represents&nbsp;this&nbsp;parameter&nbsp;per<br>
+default.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="processing.parameters.html#PathParameter">PathParameter</a></dd>
+<dd><a href="processing.parameters.html#StringParameter">StringParameter</a></dd>
+<dd><a href="processing.parameters.html#Parameter">Parameter</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="PathParameter-__init__"><strong>__init__</strong></a>(self, name, description<font color="#909090">=None</font>, defaultValue<font color="#909090">='.'</font>, role<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="processing.parameters.html#Parameter">Parameter</a>:<br>
+<dl><dt><a name="PathParameter-defaultValue"><strong>defaultValue</strong></a>(self)</dt><dd><tt>The&nbsp;parameter's&nbsp;default&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="PathParameter-description"><strong>description</strong></a>(self)</dt><dd><tt>Longer,&nbsp;optional&nbsp;description&nbsp;of&nbsp;the&nbsp;parameter.<br>
+Currently&nbsp;unused.&nbsp;May&nbsp;appear&nbsp;as&nbsp;a&nbsp;tool-tip&nbsp;in&nbsp;the&nbsp;future.</tt></dd></dl>
+
+<dl><dt><a name="PathParameter-isMandatory"><strong>isMandatory</strong></a>(self)</dt><dd><tt>A&nbsp;mandatory&nbsp;parameter&nbsp;must&nbsp;be&nbsp;set&nbsp;when&nbsp;excecuting&nbsp;the<br>
+module&nbsp;instance.<br>
+If&nbsp;not&nbsp;set&nbsp;by&nbsp;the&nbsp;user&nbsp;it&nbsp;may&nbsp;still&nbsp;use&nbsp;its&nbsp;default&nbsp;value,<br>
+if&nbsp;present.<br>
+An&nbsp;optional&nbsp;parameter&nbsp;can&nbsp;be&nbsp;set&nbsp;or&nbsp;not,&nbsp;but&nbsp;will&nbsp;allways<br>
+be&nbsp;set&nbsp;if&nbsp;a&nbsp;default&nbsp;value&nbsp;is&nbsp;provided.</tt></dd></dl>
+
+<dl><dt><a name="PathParameter-name"><strong>name</strong></a>(self)</dt><dd><tt>The&nbsp;name&nbsp;displayed&nbsp;in&nbsp;the&nbsp;module&nbsp;instance's&nbsp;run&nbsp;dialog.</tt></dd></dl>
+
+<dl><dt><a name="PathParameter-role"><strong>role</strong></a>(self)</dt><dd><tt>See&nbsp;<a href="#Parameter">Parameter</a>.Role&nbsp;and&nbsp;<a href="#Parameter">Parameter</a>&nbsp;classes.</tt></dd></dl>
+
+<dl><dt><a name="PathParameter-setDefaultValue"><strong>setDefaultValue</strong></a>(self, value)</dt></dl>
+
+<dl><dt><a name="PathParameter-setMandatory"><strong>setMandatory</strong></a>(self, mandatory)</dt></dl>
+
+<dl><dt><a name="PathParameter-setRole"><strong>setRole</strong></a>(self, role)</dt></dl>
+
+<dl><dt><a name="PathParameter-setValidator"><strong>setValidator</strong></a>(self, validator)</dt></dl>
+
+<dl><dt><a name="PathParameter-type"><strong>type</strong></a>(self)</dt><dd><tt>Internal&nbsp;type&nbsp;representation.<br>
+Typically&nbsp;a&nbsp;class&nbsp;or&nbsp;basic&nbsp;python&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="PathParameter-userLevel"><strong>userLevel</strong></a>(self)</dt><dd><tt>See&nbsp;<a href="#Parameter">Parameter</a>.UserLevel&nbsp;class.</tt></dd></dl>
+
+<dl><dt><a name="PathParameter-validator"><strong>validator</strong></a>(self)</dt><dd><tt>The&nbsp;parameters&nbsp;validator.<br>
+Uses&nbsp;QValidator's&nbsp;interface,&nbsp;but&nbsp;concrete&nbsp;behavior&nbsp;may&nbsp;change<br>
+from&nbsp;one&nbsp;parameter&nbsp;to&nbsp;another.</tt></dd></dl>
+
+<dl><dt><a name="PathParameter-widget"><strong>widget</strong></a>(self, value)</dt><dd><tt>If&nbsp;this&nbsp;method&nbsp;is&nbsp;implemented&nbsp;by&nbsp;the&nbsp;backend&nbsp;developer,<br>
+it&nbsp;should&nbsp;return&nbsp;a&nbsp;QWidget&nbsp;instance&nbsp;representing&nbsp;this<br>
+parameter's&nbsp;value&nbsp;(not&nbsp;name&nbsp;or&nbsp;description).<br>
+In&nbsp;the&nbsp;case&nbsp;of&nbsp;built-in&nbsp;parameters,<br>
+no&nbsp;widget&nbsp;is&nbsp;provided,&nbsp;but&nbsp;instead&nbsp;this&nbsp;functionality&nbsp;is<br>
+hard-coded&nbsp;in&nbsp;the&nbsp;Processing&nbsp;Panel,&nbsp;to&nbsp;keep&nbsp;this&nbsp;framework<br>
+GUI-agnostic.</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="processing.parameters.html#Parameter">Parameter</a>:<br>
+<dl><dt><strong>Role</strong> = &lt;class processing.parameters.Role&gt;</dl>
+
+<dl><dt><strong>UserLevel</strong> = &lt;class processing.parameters.UserLevel&gt;</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="RangeParameter">class <strong>RangeParameter</strong></a>(<a href="processing.parameters.html#Parameter">Parameter</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;range&nbsp;is&nbsp;a&nbsp;pair&nbsp;of&nbsp;numeric&nbsp;values&nbsp;where&nbsp;top&nbsp;&gt;&nbsp;bottom.<br>
+Per&nbsp;default&nbsp;displayed&nbsp;as&nbsp;a&nbsp;pair&nbsp;of&nbsp;spinboxes.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="RangeParameter-__init__"><strong>__init__</strong></a>(self, name, description<font color="#909090">=None</font>, defaultValue<font color="#909090">=(0.0, 100.0)</font>, role<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="processing.parameters.html#Parameter">Parameter</a>:<br>
+<dl><dt><a name="RangeParameter-defaultValue"><strong>defaultValue</strong></a>(self)</dt><dd><tt>The&nbsp;parameter's&nbsp;default&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="RangeParameter-description"><strong>description</strong></a>(self)</dt><dd><tt>Longer,&nbsp;optional&nbsp;description&nbsp;of&nbsp;the&nbsp;parameter.<br>
+Currently&nbsp;unused.&nbsp;May&nbsp;appear&nbsp;as&nbsp;a&nbsp;tool-tip&nbsp;in&nbsp;the&nbsp;future.</tt></dd></dl>
+
+<dl><dt><a name="RangeParameter-isMandatory"><strong>isMandatory</strong></a>(self)</dt><dd><tt>A&nbsp;mandatory&nbsp;parameter&nbsp;must&nbsp;be&nbsp;set&nbsp;when&nbsp;excecuting&nbsp;the<br>
+module&nbsp;instance.<br>
+If&nbsp;not&nbsp;set&nbsp;by&nbsp;the&nbsp;user&nbsp;it&nbsp;may&nbsp;still&nbsp;use&nbsp;its&nbsp;default&nbsp;value,<br>
+if&nbsp;present.<br>
+An&nbsp;optional&nbsp;parameter&nbsp;can&nbsp;be&nbsp;set&nbsp;or&nbsp;not,&nbsp;but&nbsp;will&nbsp;allways<br>
+be&nbsp;set&nbsp;if&nbsp;a&nbsp;default&nbsp;value&nbsp;is&nbsp;provided.</tt></dd></dl>
+
+<dl><dt><a name="RangeParameter-name"><strong>name</strong></a>(self)</dt><dd><tt>The&nbsp;name&nbsp;displayed&nbsp;in&nbsp;the&nbsp;module&nbsp;instance's&nbsp;run&nbsp;dialog.</tt></dd></dl>
+
+<dl><dt><a name="RangeParameter-role"><strong>role</strong></a>(self)</dt><dd><tt>See&nbsp;<a href="#Parameter">Parameter</a>.Role&nbsp;and&nbsp;<a href="#Parameter">Parameter</a>&nbsp;classes.</tt></dd></dl>
+
+<dl><dt><a name="RangeParameter-setDefaultValue"><strong>setDefaultValue</strong></a>(self, value)</dt></dl>
+
+<dl><dt><a name="RangeParameter-setMandatory"><strong>setMandatory</strong></a>(self, mandatory)</dt></dl>
+
+<dl><dt><a name="RangeParameter-setRole"><strong>setRole</strong></a>(self, role)</dt></dl>
+
+<dl><dt><a name="RangeParameter-setValidator"><strong>setValidator</strong></a>(self, validator)</dt></dl>
+
+<dl><dt><a name="RangeParameter-type"><strong>type</strong></a>(self)</dt><dd><tt>Internal&nbsp;type&nbsp;representation.<br>
+Typically&nbsp;a&nbsp;class&nbsp;or&nbsp;basic&nbsp;python&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="RangeParameter-userLevel"><strong>userLevel</strong></a>(self)</dt><dd><tt>See&nbsp;<a href="#Parameter">Parameter</a>.UserLevel&nbsp;class.</tt></dd></dl>
+
+<dl><dt><a name="RangeParameter-validator"><strong>validator</strong></a>(self)</dt><dd><tt>The&nbsp;parameters&nbsp;validator.<br>
+Uses&nbsp;QValidator's&nbsp;interface,&nbsp;but&nbsp;concrete&nbsp;behavior&nbsp;may&nbsp;change<br>
+from&nbsp;one&nbsp;parameter&nbsp;to&nbsp;another.</tt></dd></dl>
+
+<dl><dt><a name="RangeParameter-widget"><strong>widget</strong></a>(self, value)</dt><dd><tt>If&nbsp;this&nbsp;method&nbsp;is&nbsp;implemented&nbsp;by&nbsp;the&nbsp;backend&nbsp;developer,<br>
+it&nbsp;should&nbsp;return&nbsp;a&nbsp;QWidget&nbsp;instance&nbsp;representing&nbsp;this<br>
+parameter's&nbsp;value&nbsp;(not&nbsp;name&nbsp;or&nbsp;description).<br>
+In&nbsp;the&nbsp;case&nbsp;of&nbsp;built-in&nbsp;parameters,<br>
+no&nbsp;widget&nbsp;is&nbsp;provided,&nbsp;but&nbsp;instead&nbsp;this&nbsp;functionality&nbsp;is<br>
+hard-coded&nbsp;in&nbsp;the&nbsp;Processing&nbsp;Panel,&nbsp;to&nbsp;keep&nbsp;this&nbsp;framework<br>
+GUI-agnostic.</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="processing.parameters.html#Parameter">Parameter</a>:<br>
+<dl><dt><strong>Role</strong> = &lt;class processing.parameters.Role&gt;</dl>
+
+<dl><dt><strong>UserLevel</strong> = &lt;class processing.parameters.UserLevel&gt;</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="RasterLayerParameter">class <strong>RasterLayerParameter</strong></a>(<a href="processing.parameters.html#LayerParameter">LayerParameter</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;QGIS&nbsp;Raster&nbsp;layer.<br>
+It&nbsp;is&nbsp;the&nbsp;backend's&nbsp;responsability&nbsp;to&nbsp;convert&nbsp;data&nbsp;this&nbsp;into&nbsp;the<br>
+required&nbsp;format.<br>
+By&nbsp;default&nbsp;displayed&nbsp;as&nbsp;a&nbsp;drop&nbsp;box&nbsp;that&nbsp;allows&nbsp;selection&nbsp;of&nbsp;a<br>
+raster&nbsp;layer&nbsp;(or&nbsp;none,&nbsp;if&nbsp;one&nbsp;is&nbsp;to&nbsp;be&nbsp;created&nbsp;on&nbsp;output&nbsp;or&nbsp;the<br>
+parameter&nbsp;is&nbsp;optional).<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="processing.parameters.html#RasterLayerParameter">RasterLayerParameter</a></dd>
+<dd><a href="processing.parameters.html#LayerParameter">LayerParameter</a></dd>
+<dd><a href="processing.parameters.html#Parameter">Parameter</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="RasterLayerParameter-__init__"><strong>__init__</strong></a>(self, name, description<font color="#909090">=None</font>, defaultValue<font color="#909090">=[]</font>, role<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="processing.parameters.html#Parameter">Parameter</a>:<br>
+<dl><dt><a name="RasterLayerParameter-defaultValue"><strong>defaultValue</strong></a>(self)</dt><dd><tt>The&nbsp;parameter's&nbsp;default&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="RasterLayerParameter-description"><strong>description</strong></a>(self)</dt><dd><tt>Longer,&nbsp;optional&nbsp;description&nbsp;of&nbsp;the&nbsp;parameter.<br>
+Currently&nbsp;unused.&nbsp;May&nbsp;appear&nbsp;as&nbsp;a&nbsp;tool-tip&nbsp;in&nbsp;the&nbsp;future.</tt></dd></dl>
+
+<dl><dt><a name="RasterLayerParameter-isMandatory"><strong>isMandatory</strong></a>(self)</dt><dd><tt>A&nbsp;mandatory&nbsp;parameter&nbsp;must&nbsp;be&nbsp;set&nbsp;when&nbsp;excecuting&nbsp;the<br>
+module&nbsp;instance.<br>
+If&nbsp;not&nbsp;set&nbsp;by&nbsp;the&nbsp;user&nbsp;it&nbsp;may&nbsp;still&nbsp;use&nbsp;its&nbsp;default&nbsp;value,<br>
+if&nbsp;present.<br>
+An&nbsp;optional&nbsp;parameter&nbsp;can&nbsp;be&nbsp;set&nbsp;or&nbsp;not,&nbsp;but&nbsp;will&nbsp;allways<br>
+be&nbsp;set&nbsp;if&nbsp;a&nbsp;default&nbsp;value&nbsp;is&nbsp;provided.</tt></dd></dl>
+
+<dl><dt><a name="RasterLayerParameter-name"><strong>name</strong></a>(self)</dt><dd><tt>The&nbsp;name&nbsp;displayed&nbsp;in&nbsp;the&nbsp;module&nbsp;instance's&nbsp;run&nbsp;dialog.</tt></dd></dl>
+
+<dl><dt><a name="RasterLayerParameter-role"><strong>role</strong></a>(self)</dt><dd><tt>See&nbsp;<a href="#Parameter">Parameter</a>.Role&nbsp;and&nbsp;<a href="#Parameter">Parameter</a>&nbsp;classes.</tt></dd></dl>
+
+<dl><dt><a name="RasterLayerParameter-setDefaultValue"><strong>setDefaultValue</strong></a>(self, value)</dt></dl>
+
+<dl><dt><a name="RasterLayerParameter-setMandatory"><strong>setMandatory</strong></a>(self, mandatory)</dt></dl>
+
+<dl><dt><a name="RasterLayerParameter-setRole"><strong>setRole</strong></a>(self, role)</dt></dl>
+
+<dl><dt><a name="RasterLayerParameter-setValidator"><strong>setValidator</strong></a>(self, validator)</dt></dl>
+
+<dl><dt><a name="RasterLayerParameter-type"><strong>type</strong></a>(self)</dt><dd><tt>Internal&nbsp;type&nbsp;representation.<br>
+Typically&nbsp;a&nbsp;class&nbsp;or&nbsp;basic&nbsp;python&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="RasterLayerParameter-userLevel"><strong>userLevel</strong></a>(self)</dt><dd><tt>See&nbsp;<a href="#Parameter">Parameter</a>.UserLevel&nbsp;class.</tt></dd></dl>
+
+<dl><dt><a name="RasterLayerParameter-validator"><strong>validator</strong></a>(self)</dt><dd><tt>The&nbsp;parameters&nbsp;validator.<br>
+Uses&nbsp;QValidator's&nbsp;interface,&nbsp;but&nbsp;concrete&nbsp;behavior&nbsp;may&nbsp;change<br>
+from&nbsp;one&nbsp;parameter&nbsp;to&nbsp;another.</tt></dd></dl>
+
+<dl><dt><a name="RasterLayerParameter-widget"><strong>widget</strong></a>(self, value)</dt><dd><tt>If&nbsp;this&nbsp;method&nbsp;is&nbsp;implemented&nbsp;by&nbsp;the&nbsp;backend&nbsp;developer,<br>
+it&nbsp;should&nbsp;return&nbsp;a&nbsp;QWidget&nbsp;instance&nbsp;representing&nbsp;this<br>
+parameter's&nbsp;value&nbsp;(not&nbsp;name&nbsp;or&nbsp;description).<br>
+In&nbsp;the&nbsp;case&nbsp;of&nbsp;built-in&nbsp;parameters,<br>
+no&nbsp;widget&nbsp;is&nbsp;provided,&nbsp;but&nbsp;instead&nbsp;this&nbsp;functionality&nbsp;is<br>
+hard-coded&nbsp;in&nbsp;the&nbsp;Processing&nbsp;Panel,&nbsp;to&nbsp;keep&nbsp;this&nbsp;framework<br>
+GUI-agnostic.</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="processing.parameters.html#Parameter">Parameter</a>:<br>
+<dl><dt><strong>Role</strong> = &lt;class processing.parameters.Role&gt;</dl>
+
+<dl><dt><strong>UserLevel</strong> = &lt;class processing.parameters.UserLevel&gt;</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="StateParameter">class <strong>StateParameter</strong></a>(<a href="processing.parameters.html#Parameter">Parameter</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>This&nbsp;pseudo-parameter&nbsp;controls&nbsp;the&nbsp;internal&nbsp;state&nbsp;of&nbsp;the<br>
+module&nbsp;instance.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="StateParameter-__init__"><strong>__init__</strong></a>(self, defaultValue<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>State</strong> = &lt;class processing.parameters.State&gt;</dl>
+
+<hr>
+Methods inherited from <a href="processing.parameters.html#Parameter">Parameter</a>:<br>
+<dl><dt><a name="StateParameter-defaultValue"><strong>defaultValue</strong></a>(self)</dt><dd><tt>The&nbsp;parameter's&nbsp;default&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="StateParameter-description"><strong>description</strong></a>(self)</dt><dd><tt>Longer,&nbsp;optional&nbsp;description&nbsp;of&nbsp;the&nbsp;parameter.<br>
+Currently&nbsp;unused.&nbsp;May&nbsp;appear&nbsp;as&nbsp;a&nbsp;tool-tip&nbsp;in&nbsp;the&nbsp;future.</tt></dd></dl>
+
+<dl><dt><a name="StateParameter-isMandatory"><strong>isMandatory</strong></a>(self)</dt><dd><tt>A&nbsp;mandatory&nbsp;parameter&nbsp;must&nbsp;be&nbsp;set&nbsp;when&nbsp;excecuting&nbsp;the<br>
+module&nbsp;instance.<br>
+If&nbsp;not&nbsp;set&nbsp;by&nbsp;the&nbsp;user&nbsp;it&nbsp;may&nbsp;still&nbsp;use&nbsp;its&nbsp;default&nbsp;value,<br>
+if&nbsp;present.<br>
+An&nbsp;optional&nbsp;parameter&nbsp;can&nbsp;be&nbsp;set&nbsp;or&nbsp;not,&nbsp;but&nbsp;will&nbsp;allways<br>
+be&nbsp;set&nbsp;if&nbsp;a&nbsp;default&nbsp;value&nbsp;is&nbsp;provided.</tt></dd></dl>
+
+<dl><dt><a name="StateParameter-name"><strong>name</strong></a>(self)</dt><dd><tt>The&nbsp;name&nbsp;displayed&nbsp;in&nbsp;the&nbsp;module&nbsp;instance's&nbsp;run&nbsp;dialog.</tt></dd></dl>
+
+<dl><dt><a name="StateParameter-role"><strong>role</strong></a>(self)</dt><dd><tt>See&nbsp;<a href="#Parameter">Parameter</a>.Role&nbsp;and&nbsp;<a href="#Parameter">Parameter</a>&nbsp;classes.</tt></dd></dl>
+
+<dl><dt><a name="StateParameter-setDefaultValue"><strong>setDefaultValue</strong></a>(self, value)</dt></dl>
+
+<dl><dt><a name="StateParameter-setMandatory"><strong>setMandatory</strong></a>(self, mandatory)</dt></dl>
+
+<dl><dt><a name="StateParameter-setRole"><strong>setRole</strong></a>(self, role)</dt></dl>
+
+<dl><dt><a name="StateParameter-setValidator"><strong>setValidator</strong></a>(self, validator)</dt></dl>
+
+<dl><dt><a name="StateParameter-type"><strong>type</strong></a>(self)</dt><dd><tt>Internal&nbsp;type&nbsp;representation.<br>
+Typically&nbsp;a&nbsp;class&nbsp;or&nbsp;basic&nbsp;python&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="StateParameter-userLevel"><strong>userLevel</strong></a>(self)</dt><dd><tt>See&nbsp;<a href="#Parameter">Parameter</a>.UserLevel&nbsp;class.</tt></dd></dl>
+
+<dl><dt><a name="StateParameter-validator"><strong>validator</strong></a>(self)</dt><dd><tt>The&nbsp;parameters&nbsp;validator.<br>
+Uses&nbsp;QValidator's&nbsp;interface,&nbsp;but&nbsp;concrete&nbsp;behavior&nbsp;may&nbsp;change<br>
+from&nbsp;one&nbsp;parameter&nbsp;to&nbsp;another.</tt></dd></dl>
+
+<dl><dt><a name="StateParameter-widget"><strong>widget</strong></a>(self, value)</dt><dd><tt>If&nbsp;this&nbsp;method&nbsp;is&nbsp;implemented&nbsp;by&nbsp;the&nbsp;backend&nbsp;developer,<br>
+it&nbsp;should&nbsp;return&nbsp;a&nbsp;QWidget&nbsp;instance&nbsp;representing&nbsp;this<br>
+parameter's&nbsp;value&nbsp;(not&nbsp;name&nbsp;or&nbsp;description).<br>
+In&nbsp;the&nbsp;case&nbsp;of&nbsp;built-in&nbsp;parameters,<br>
+no&nbsp;widget&nbsp;is&nbsp;provided,&nbsp;but&nbsp;instead&nbsp;this&nbsp;functionality&nbsp;is<br>
+hard-coded&nbsp;in&nbsp;the&nbsp;Processing&nbsp;Panel,&nbsp;to&nbsp;keep&nbsp;this&nbsp;framework<br>
+GUI-agnostic.</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="processing.parameters.html#Parameter">Parameter</a>:<br>
+<dl><dt><strong>Role</strong> = &lt;class processing.parameters.Role&gt;</dl>
+
+<dl><dt><strong>UserLevel</strong> = &lt;class processing.parameters.UserLevel&gt;</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="StringParameter">class <strong>StringParameter</strong></a>(<a href="processing.parameters.html#Parameter">Parameter</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;basic&nbsp;string&nbsp;parameter.<br>
+Per&nbsp;default&nbsp;displayed&nbsp;as&nbsp;a&nbsp;line&nbsp;edit&nbsp;widget&nbsp;or&nbsp;label&nbsp;(in&nbsp;the&nbsp;case<br>
+of&nbsp;output).<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="StringParameter-__init__"><strong>__init__</strong></a>(self, name, description<font color="#909090">=None</font>, defaultValue<font color="#909090">=''</font>, role<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="processing.parameters.html#Parameter">Parameter</a>:<br>
+<dl><dt><a name="StringParameter-defaultValue"><strong>defaultValue</strong></a>(self)</dt><dd><tt>The&nbsp;parameter's&nbsp;default&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="StringParameter-description"><strong>description</strong></a>(self)</dt><dd><tt>Longer,&nbsp;optional&nbsp;description&nbsp;of&nbsp;the&nbsp;parameter.<br>
+Currently&nbsp;unused.&nbsp;May&nbsp;appear&nbsp;as&nbsp;a&nbsp;tool-tip&nbsp;in&nbsp;the&nbsp;future.</tt></dd></dl>
+
+<dl><dt><a name="StringParameter-isMandatory"><strong>isMandatory</strong></a>(self)</dt><dd><tt>A&nbsp;mandatory&nbsp;parameter&nbsp;must&nbsp;be&nbsp;set&nbsp;when&nbsp;excecuting&nbsp;the<br>
+module&nbsp;instance.<br>
+If&nbsp;not&nbsp;set&nbsp;by&nbsp;the&nbsp;user&nbsp;it&nbsp;may&nbsp;still&nbsp;use&nbsp;its&nbsp;default&nbsp;value,<br>
+if&nbsp;present.<br>
+An&nbsp;optional&nbsp;parameter&nbsp;can&nbsp;be&nbsp;set&nbsp;or&nbsp;not,&nbsp;but&nbsp;will&nbsp;allways<br>
+be&nbsp;set&nbsp;if&nbsp;a&nbsp;default&nbsp;value&nbsp;is&nbsp;provided.</tt></dd></dl>
+
+<dl><dt><a name="StringParameter-name"><strong>name</strong></a>(self)</dt><dd><tt>The&nbsp;name&nbsp;displayed&nbsp;in&nbsp;the&nbsp;module&nbsp;instance's&nbsp;run&nbsp;dialog.</tt></dd></dl>
+
+<dl><dt><a name="StringParameter-role"><strong>role</strong></a>(self)</dt><dd><tt>See&nbsp;<a href="#Parameter">Parameter</a>.Role&nbsp;and&nbsp;<a href="#Parameter">Parameter</a>&nbsp;classes.</tt></dd></dl>
+
+<dl><dt><a name="StringParameter-setDefaultValue"><strong>setDefaultValue</strong></a>(self, value)</dt></dl>
+
+<dl><dt><a name="StringParameter-setMandatory"><strong>setMandatory</strong></a>(self, mandatory)</dt></dl>
+
+<dl><dt><a name="StringParameter-setRole"><strong>setRole</strong></a>(self, role)</dt></dl>
+
+<dl><dt><a name="StringParameter-setValidator"><strong>setValidator</strong></a>(self, validator)</dt></dl>
+
+<dl><dt><a name="StringParameter-type"><strong>type</strong></a>(self)</dt><dd><tt>Internal&nbsp;type&nbsp;representation.<br>
+Typically&nbsp;a&nbsp;class&nbsp;or&nbsp;basic&nbsp;python&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="StringParameter-userLevel"><strong>userLevel</strong></a>(self)</dt><dd><tt>See&nbsp;<a href="#Parameter">Parameter</a>.UserLevel&nbsp;class.</tt></dd></dl>
+
+<dl><dt><a name="StringParameter-validator"><strong>validator</strong></a>(self)</dt><dd><tt>The&nbsp;parameters&nbsp;validator.<br>
+Uses&nbsp;QValidator's&nbsp;interface,&nbsp;but&nbsp;concrete&nbsp;behavior&nbsp;may&nbsp;change<br>
+from&nbsp;one&nbsp;parameter&nbsp;to&nbsp;another.</tt></dd></dl>
+
+<dl><dt><a name="StringParameter-widget"><strong>widget</strong></a>(self, value)</dt><dd><tt>If&nbsp;this&nbsp;method&nbsp;is&nbsp;implemented&nbsp;by&nbsp;the&nbsp;backend&nbsp;developer,<br>
+it&nbsp;should&nbsp;return&nbsp;a&nbsp;QWidget&nbsp;instance&nbsp;representing&nbsp;this<br>
+parameter's&nbsp;value&nbsp;(not&nbsp;name&nbsp;or&nbsp;description).<br>
+In&nbsp;the&nbsp;case&nbsp;of&nbsp;built-in&nbsp;parameters,<br>
+no&nbsp;widget&nbsp;is&nbsp;provided,&nbsp;but&nbsp;instead&nbsp;this&nbsp;functionality&nbsp;is<br>
+hard-coded&nbsp;in&nbsp;the&nbsp;Processing&nbsp;Panel,&nbsp;to&nbsp;keep&nbsp;this&nbsp;framework<br>
+GUI-agnostic.</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="processing.parameters.html#Parameter">Parameter</a>:<br>
+<dl><dt><strong>Role</strong> = &lt;class processing.parameters.Role&gt;</dl>
+
+<dl><dt><strong>UserLevel</strong> = &lt;class processing.parameters.UserLevel&gt;</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="VectorLayerParameter">class <strong>VectorLayerParameter</strong></a>(<a href="processing.parameters.html#LayerParameter">LayerParameter</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;QGIS&nbsp;Vector&nbsp;layer.<br>
+It&nbsp;is&nbsp;the&nbsp;backend's&nbsp;responsability&nbsp;to&nbsp;convert&nbsp;data&nbsp;this&nbsp;into&nbsp;the<br>
+required&nbsp;format.<br>
+By&nbsp;default&nbsp;displayed&nbsp;as&nbsp;a&nbsp;drop&nbsp;box&nbsp;that&nbsp;allows&nbsp;selection&nbsp;of&nbsp;a<br>
+vector&nbsp;layer&nbsp;(or&nbsp;none,&nbsp;if&nbsp;one&nbsp;is&nbsp;to&nbsp;be&nbsp;created&nbsp;on&nbsp;output&nbsp;or&nbsp;the<br>
+parameter&nbsp;is&nbsp;optional).<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="processing.parameters.html#VectorLayerParameter">VectorLayerParameter</a></dd>
+<dd><a href="processing.parameters.html#LayerParameter">LayerParameter</a></dd>
+<dd><a href="processing.parameters.html#Parameter">Parameter</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="VectorLayerParameter-__init__"><strong>__init__</strong></a>(self, name, description<font color="#909090">=None</font>, defaultValue<font color="#909090">=[]</font>, role<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="processing.parameters.html#Parameter">Parameter</a>:<br>
+<dl><dt><a name="VectorLayerParameter-defaultValue"><strong>defaultValue</strong></a>(self)</dt><dd><tt>The&nbsp;parameter's&nbsp;default&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="VectorLayerParameter-description"><strong>description</strong></a>(self)</dt><dd><tt>Longer,&nbsp;optional&nbsp;description&nbsp;of&nbsp;the&nbsp;parameter.<br>
+Currently&nbsp;unused.&nbsp;May&nbsp;appear&nbsp;as&nbsp;a&nbsp;tool-tip&nbsp;in&nbsp;the&nbsp;future.</tt></dd></dl>
+
+<dl><dt><a name="VectorLayerParameter-isMandatory"><strong>isMandatory</strong></a>(self)</dt><dd><tt>A&nbsp;mandatory&nbsp;parameter&nbsp;must&nbsp;be&nbsp;set&nbsp;when&nbsp;excecuting&nbsp;the<br>
+module&nbsp;instance.<br>
+If&nbsp;not&nbsp;set&nbsp;by&nbsp;the&nbsp;user&nbsp;it&nbsp;may&nbsp;still&nbsp;use&nbsp;its&nbsp;default&nbsp;value,<br>
+if&nbsp;present.<br>
+An&nbsp;optional&nbsp;parameter&nbsp;can&nbsp;be&nbsp;set&nbsp;or&nbsp;not,&nbsp;but&nbsp;will&nbsp;allways<br>
+be&nbsp;set&nbsp;if&nbsp;a&nbsp;default&nbsp;value&nbsp;is&nbsp;provided.</tt></dd></dl>
+
+<dl><dt><a name="VectorLayerParameter-name"><strong>name</strong></a>(self)</dt><dd><tt>The&nbsp;name&nbsp;displayed&nbsp;in&nbsp;the&nbsp;module&nbsp;instance's&nbsp;run&nbsp;dialog.</tt></dd></dl>
+
+<dl><dt><a name="VectorLayerParameter-role"><strong>role</strong></a>(self)</dt><dd><tt>See&nbsp;<a href="#Parameter">Parameter</a>.Role&nbsp;and&nbsp;<a href="#Parameter">Parameter</a>&nbsp;classes.</tt></dd></dl>
+
+<dl><dt><a name="VectorLayerParameter-setDefaultValue"><strong>setDefaultValue</strong></a>(self, value)</dt></dl>
+
+<dl><dt><a name="VectorLayerParameter-setMandatory"><strong>setMandatory</strong></a>(self, mandatory)</dt></dl>
+
+<dl><dt><a name="VectorLayerParameter-setRole"><strong>setRole</strong></a>(self, role)</dt></dl>
+
+<dl><dt><a name="VectorLayerParameter-setValidator"><strong>setValidator</strong></a>(self, validator)</dt></dl>
+
+<dl><dt><a name="VectorLayerParameter-type"><strong>type</strong></a>(self)</dt><dd><tt>Internal&nbsp;type&nbsp;representation.<br>
+Typically&nbsp;a&nbsp;class&nbsp;or&nbsp;basic&nbsp;python&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="VectorLayerParameter-userLevel"><strong>userLevel</strong></a>(self)</dt><dd><tt>See&nbsp;<a href="#Parameter">Parameter</a>.UserLevel&nbsp;class.</tt></dd></dl>
+
+<dl><dt><a name="VectorLayerParameter-validator"><strong>validator</strong></a>(self)</dt><dd><tt>The&nbsp;parameters&nbsp;validator.<br>
+Uses&nbsp;QValidator's&nbsp;interface,&nbsp;but&nbsp;concrete&nbsp;behavior&nbsp;may&nbsp;change<br>
+from&nbsp;one&nbsp;parameter&nbsp;to&nbsp;another.</tt></dd></dl>
+
+<dl><dt><a name="VectorLayerParameter-widget"><strong>widget</strong></a>(self, value)</dt><dd><tt>If&nbsp;this&nbsp;method&nbsp;is&nbsp;implemented&nbsp;by&nbsp;the&nbsp;backend&nbsp;developer,<br>
+it&nbsp;should&nbsp;return&nbsp;a&nbsp;QWidget&nbsp;instance&nbsp;representing&nbsp;this<br>
+parameter's&nbsp;value&nbsp;(not&nbsp;name&nbsp;or&nbsp;description).<br>
+In&nbsp;the&nbsp;case&nbsp;of&nbsp;built-in&nbsp;parameters,<br>
+no&nbsp;widget&nbsp;is&nbsp;provided,&nbsp;but&nbsp;instead&nbsp;this&nbsp;functionality&nbsp;is<br>
+hard-coded&nbsp;in&nbsp;the&nbsp;Processing&nbsp;Panel,&nbsp;to&nbsp;keep&nbsp;this&nbsp;framework<br>
+GUI-agnostic.</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="processing.parameters.html#Parameter">Parameter</a>:<br>
+<dl><dt><strong>Role</strong> = &lt;class processing.parameters.Role&gt;</dl>
+
+<dl><dt><strong>UserLevel</strong> = &lt;class processing.parameters.UserLevel&gt;</dl>
+
+</td></tr></table></td></tr></table>
+</body></html>
