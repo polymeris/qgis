@@ -1,11 +1,29 @@
-html {
-    margin: 40px;
+body {
+    margin: 0px;
 }
 
-body {
-    padding: 145px 180px;
-    background-image:url('banner.png');
-    background-repeat:no-repeat;
+h1,h2,h3,h4 {
+    font-family: "Bitstream Charter", "ITC Charter", "Book Antiqua", Baskerville, "Bookman Old Style", "New Century Schoolbook", serif;
+}
+
+div.banner {
+    position: absolute;
+}
+
+div#left {
+    top: 42px;
+    left: 28px;
+}
+
+div#right {
+    top: 0px;
+    right: 0px;
+}
+
+.text {
+    position: absolute;
+    top: 0px;
+    padding: 195px 226px;
 }
 
 p {
