@@ -1,3 +1,3 @@
 git checkout gh-pages
-cat yaml-header ../qgis.wiki/Home.md > index.md && \
-    git add index.md && git commit -m "Update static pages."
+markdown ../qgis.wiki/Home.md > body && \
+    cat head body tail > index.html && git commit -m "Update static pages."
