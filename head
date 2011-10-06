@@ -1,4 +1,7 @@
 <html>
-<head><title>QGIS Processing Framework</title></head>
+<head>
+    <title>QGIS Processing Framework</title>
+    <link rel="stylesheet" type="text/css" href="qgispf.css" />
+</head>
 <body>
-<div width="50em">
+<div>
