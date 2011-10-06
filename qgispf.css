@@ -12,3 +12,11 @@ p {
     text-align:justify;
 }
 
+a {
+    color:#4e9a06;
+    text-decoration:none;
+}
+
+a:hover {
+    color:6fc41c;
+}
