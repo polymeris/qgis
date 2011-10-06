@@ -1,3 +1,6 @@
+---
+layout: default
+---
 # QGIS Processing Framework & SAGA Interface
 In [QGIS](http://www.qgis.org/) there are [several analytical tools](http://www.qgis.org/wiki/Analytical_framework), mostly relying on external software. We plan to add a common framework, so every tool will fit in, and all tools could be used either individually or chained together.
 
