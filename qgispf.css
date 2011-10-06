@@ -1,0 +1,14 @@
+html {
+    margin: 40px;
+}
+
+body {
+    padding: 145px 180px;
+    background-image:url('banner.png');
+    background-repeat:no-repeat;
+}
+
+p {
+    text-align:justify;
+}
+
