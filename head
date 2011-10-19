@@ -5,5 +5,5 @@
 </head>
 <body>
 <div class="banner" id="left"><img src="banner.png"/></div>
-<div class="banner" id="right"><img src="with-saga.png"/></div>
+<div class="banner" id="right"><img src="banners-right.png"/></div>
 <div class="text">
